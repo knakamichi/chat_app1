@@ -2,7 +2,6 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
 import ActionTypes from '../constants/app'
-import ActionTypes from '../actions/messages'
 
 class MsgsStore extends BaseStore {
 
