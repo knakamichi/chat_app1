@@ -1,12 +1,12 @@
 import React from 'react'
-import MessagesStore from '../../stores/messages'
+import Msgs from '../../stores/Msgs'
 import MessagesAction from '../../actions/messages'
 
 class ReplyBox extends React.Component {
   constructor(props) {
-  super(props)
-  this.state = this.initialState
-}
+    super(props)
+    this.state = this.initialState
+  }
 
 get initialState() {
   return {

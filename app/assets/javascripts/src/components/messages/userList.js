@@ -45,7 +45,7 @@ class UserList extends React.Component {
   }
 
   changeOpenChat(id) {
-    MessagesAction.changeOpenChat(id) 
+    MessagesAction.changeOpenChat(id)
   }
 
   render() {
