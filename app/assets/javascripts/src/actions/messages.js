@@ -13,7 +13,7 @@ export default {
         if (!error && res.status === 200) { // 200はアクセスが成功した際のステータスコードです。
           const json = JSON.parse(res.text)
           Dispatcher.handleServerAction({
-            type: ActionTypes.GET_Msgs,
+            type: ActionTypes.GET_MSGS,
             json, // json: jsonと同じ。keyとvalueが一致する場合、このように省略出来ます。
           })
           resolve(json)
@@ -35,7 +35,7 @@ export default {
         if (!error && res.status === 200) {
           const json = JSON.parse(res.text)
           Dispatcher.handleServerAction({
-            type: ActionTypes.POST_Msgs,
+            type: ActionTypes.POST_MSGS,
             MsgsId,
             json,
           })

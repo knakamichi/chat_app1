@@ -15,9 +15,13 @@ get initialState() {
 }
 handleKeyDown(e) {
   if (e.keyCode === 13) {
-    MessagesAction.sendMessage(MessagesStore.getOpenChatUserID(), this.state.value)
+    // MessagesAction.sendMessage(Msgs.getMsgs(), this.state.value)
     this.setState({
       value: '',
+    })
+  } else {
+    this.setState({
+      value: this.state.value + e.key,
     })
   }
 }
@@ -32,7 +36,7 @@ updateValue(e) {
     return (
       <div className='reply-box'>
         <input
-          value={ this.state.value }
+          value={ this.state.value } // 入力内容。
           onKeyDown={ this.handleKeyDown.bind(this) }
           className='reply-box__input'
           placeholder='Type message to reply..'

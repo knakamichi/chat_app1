@@ -2,6 +2,7 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
 import ActionTypes from '../constants/app'
+// import MessagesAction from '../../actions/messages'
 
 class MsgsStore extends BaseStore {
 
@@ -14,10 +15,10 @@ class MsgsStore extends BaseStore {
     this.set('MsgsJson', array)
   }
 
-  postMsgs(MsgsID){
-    this.postMsgs('MsgsJson')
+  postMsgs(MsgsID) {
+    this.postMsgs('MsgsJson', MsgsID)
   }
-
+}
 const Msgs = new MsgsStore()
 
 Msgs.dispatchToken = Dispatcher.register(payload => {
@@ -29,10 +30,9 @@ Msgs.dispatchToken = Dispatcher.register(payload => {
       Msgs.emitChange()
       break
 
-    case ActionTypes.POST_Msgs:
-        Msgs.emitChange()
-        })
-}
+    case ActionTypes.POST_MSGS:
+      Msgs.emitChange()
+  }
 
   return true
 })
