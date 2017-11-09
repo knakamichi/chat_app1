@@ -7,10 +7,17 @@ module Api
     end
 
     def create
-      content = params[:content]
-      message = Message.new
-      message.content.save
+      content = params[:contents]
+      message = Message.new(content: content)
+      message.save
+      render json: message
     end
+
+    private
+
+      # def message_params
+      #   params.require(:contents).permit(:contents)
+      # end
   end
 
 end

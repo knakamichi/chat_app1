@@ -1,23 +1,29 @@
 // stores/Msgs.js
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
-import ActionTypes from '../constants/app'
-// import ActionTypes from '../../actions/messages'
+import {ActionTypes} from '../constants/app'
+import MessagesAction from '../actions/messages'
 
 class MsgsStore extends BaseStore {
-
- getMsgs() {
+  addChangeListener(callback) {
+  this.on('change', callback)
+  }
+  removeChangeListener(callback) {
+  this.off('change', callback)
+  }
+// debugger
+  getMsgs() {
    if (!this.get('MsgsJson')) this.setMsgs([])
    return this.get('MsgsJson')
- }
+  }
 
   setMsgs(array) {
     this.set('MsgsJson', array)
   }
 
-  postMsgs(MsgsID) {
-    this.postMsgs('MsgsJson', MsgsID)
-  }
+  // postMsgs(messagesContent) {
+  //   this.postMsgs('MsgsJson', messagesContent)
+  // }
 }
 const Msgs = new MsgsStore()
 
@@ -26,12 +32,13 @@ Msgs.dispatchToken = Dispatcher.register(payload => {
 
   switch (action.type) {
     case ActionTypes.GET_MSGS:
-      Msgs.setMsgs(action.json)
+      Msgs.getMsgs(action.json)
       Msgs.emitChange()
       break
 
     case ActionTypes.POST_MSGS:
       Msgs.emitChange()
+      break
   }
 
   return true

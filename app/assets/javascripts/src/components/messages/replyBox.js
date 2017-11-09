@@ -13,20 +13,23 @@ get initialState() {
     value: '',
   }
 }
-handleChange(e) {
-  if (e.keyCode === 13) {
-    MessagesAction.sendMessage(Msgs.getMsgs(), this.state.value)
+onSubmit(e) {
+  // if (e.keyCode === 13) {
+  e.preventDefault()      // html経由の入力によって発生する同期処理を止め、非同期処理に移る。
+    MessagesAction.postMsgs(this.state.value)
     this.setState({
       value: '',
     })
-  } else {
-    this.setState({
-      value: this.state.value + e.key,
-    })
-  }
+  // }
+  // } else {
+  //   this.setState({
+  //     value: this.state.value + e.key,    意味：入力された値 + 押されたキー ＝ 二重入力
+  //   })
+  // }
 }
 
 updateValue(e) {
+  // debugger
   this.setState({
     value: e.target.value,
   })
@@ -35,16 +38,16 @@ updateValue(e) {
   render() {
     return (
       <div className='reply-box'>
-        <input
-          value={ this.state.value } // 入力内容。
-          onKeyDown={ this.handleKeyDown.bind(this) }
-          onChange={ this.updateValue.bind(this) }
-          className='reply-box__input'
-          placeholder='Type message to reply..'
-        />
-        <span className='reply-box__tip'>
-          Press <span className='reply-box__tip__button'>Enter</span> to send
-        </span>
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <input
+            value={ this.state.value } // 入力内容をvalue(=textarea)に代入
+            // onKeyDown={ this.handleKeyDown.bind(this) } これをかくと、押されたキーがenterキーかどうかを判断しなければならない（e.keycode)
+            onChange={ this.updateValue.bind(this) }
+            className='reply-box__input'
+            placeholder='Type message to reply..'
+          />
+          <button type="submit" value="Submit">Send</button>
+        </form>
       </div>
     )
   }
