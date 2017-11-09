@@ -13,9 +13,9 @@ get initialState() {
     value: '',
   }
 }
-handleKeyDown(e) {
+handleChange(e) {
   if (e.keyCode === 13) {
-    // MessagesAction.sendMessage(Msgs.getMsgs(), this.state.value)
+    MessagesAction.sendMessage(Msgs.getMsgs(), this.state.value)
     this.setState({
       value: '',
     })
@@ -38,6 +38,7 @@ updateValue(e) {
         <input
           value={ this.state.value } // 入力内容。
           onKeyDown={ this.handleKeyDown.bind(this) }
+          onChange={ this.updateValue.bind(this) }
           className='reply-box__input'
           placeholder='Type message to reply..'
         />

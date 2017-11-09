@@ -12,5 +12,5 @@ export function CSRFToken() {
 const Root = window.location.origin
 const APIRoot = `${Root}/api`
 export const APIEndpoints = {
-  Msgs: APIRoot + '/Msgs',
+  MESSAGES: APIRoot + '/messages',
 }

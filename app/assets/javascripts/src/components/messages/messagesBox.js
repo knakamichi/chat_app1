@@ -31,7 +31,7 @@ class MessagesBox extends React.Component {
   }
 
   render() {
-    const messagesLength = this.state.messages.length
+    // const messagesLength = this.state.messages.length
     // const currentUserID = UserStore.user.id
 
     const messages = this.state.messages.map((message, index) => {

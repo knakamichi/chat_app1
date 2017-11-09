@@ -8,7 +8,7 @@ export default {
   getMsgs() {
     return new Promise((resolve, reject) => {
       request
-      .get('/models/message.rb') // 取得したいjsonがあるURLを指定する
+      .get(`${APIEndpoints.MESSAGES}`) // 取得したいjsonがあるURLを指定する
       .end((error, res) => {
         if (!error && res.status === 200) { // 200はアクセスが成功した際のステータスコードです。
           const json = JSON.parse(res.text)
@@ -25,18 +25,18 @@ export default {
   },
 
 // postの場合
-  postMsgs(MsgsId) {
+  postMsgs(messageContent) {
     return new Promise((resolve, reject) => {
       request
-      .post(`${APIEndpoints.Msgs}`) //
+      .post(`${APIEndpoints.MESSAGES}`) // たまたまpostのrouting がget と同じ。（rake routes 参照）
       .set('X-CSRF-Token', CSRFToken()) // CSRF防止対策
-      .send({Msgs_id: MsgsId}) // これによりサーバ側に送りたいデータを送ることが出来ます。
+      .send({contents: messageContent}) // これによりサーバ側に送りたいデータを送ることが出来ます。（postMsgs()後の引数と一致させて動的化）
       .end((error, res) => {
         if (!error && res.status === 200) {
           const json = JSON.parse(res.text)
           Dispatcher.handleServerAction({
             type: ActionTypes.POST_MSGS,
-            MsgsId,
+            messageContent,
             json,
           })
         } else {
