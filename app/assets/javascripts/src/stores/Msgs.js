@@ -2,19 +2,19 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
 import {ActionTypes} from '../constants/app'
-import MessagesAction from '../actions/messages'
+// import MessagesAction from '../actions/messages'
 
 class MsgsStore extends BaseStore {
   addChangeListener(callback) {
-  this.on('change', callback)
+    this.on('change', callback)
   }
   removeChangeListener(callback) {
-  this.off('change', callback)
+    this.off('change', callback)
   }
 // debugger
   getMsgs() {
-   if (!this.get('MsgsJson')) this.setMsgs([])
-   return this.get('MsgsJson')
+    if (!this.get('MsgsJson')) this.setMsgs([])
+    return this.get('MsgsJson')
   }
 
   setMsgs(array) {

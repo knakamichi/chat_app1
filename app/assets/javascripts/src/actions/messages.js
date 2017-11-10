@@ -26,7 +26,7 @@ export default {
 
 // postの場合
   postMsgs(messageContent) {
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) => {
       request
       .post(`${APIEndpoints.MESSAGES}`) // たまたまpostのrouting がget と同じ。（rake routes 参照）
       .set('X-CSRF-Token', CSRFToken()) // CSRF防止対策
