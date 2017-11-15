@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-
+  devise_for :users
 namespace :api, { format: 'json' } do
   resources :messages
 end

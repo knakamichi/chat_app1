@@ -7,8 +7,8 @@
     = javascript_include_tag 'application'
     = javascript_include_tag '/assets/javascripts/boot.js'
     = csrf_meta_tags
-  %body
     %if notice
     %p.notice= notice
     %p.alert= alert
     = yield
+  %body
