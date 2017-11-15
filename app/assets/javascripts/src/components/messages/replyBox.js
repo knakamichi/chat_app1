@@ -1,5 +1,5 @@
 import React from 'react'
-import Msgs from '../../stores/Msgs'
+// import Msgs from '../../stores/Msgs'
 import MessagesAction from '../../actions/messages'
 
 class ReplyBox extends React.Component {
@@ -40,8 +40,7 @@ updateValue(e) {
       <div className='reply-box'>
         <form onSubmit={this.onSubmit.bind(this)}>
           <input
-            value={ this.state.value } // 入力内容をvalue(=textarea)に代入
-            // onKeyDown={ this.handleKeyDown.bind(this) } これをかくと、押されたキーがenterキーかどうかを判断しなければならない（e.keycode)
+            value={ this.state.value }
             onChange={ this.updateValue.bind(this) }
             className='reply-box__input'
             placeholder='Type message to reply..'
@@ -54,3 +53,6 @@ updateValue(e) {
 }
 
 export default ReplyBox
+
+// value={ this.state.value } // 入力内容をvalue(=textarea)に代入
+// onKeyDown={ this.handleKeyDown.bind(this) } これをかくと、押されたキーがenterキーかどうかを判断しなければならない（e.keycode)
