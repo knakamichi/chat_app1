@@ -2,12 +2,11 @@ import React from 'react'
 // import _ from 'lodash'
 // import classNames from 'classnames'
 // import Utils from '../../utils'
-// // import UserStore from '../../stores/user'
 // import Msgs from '../../stores/Msgs'
 // import MessagesAction from '../../actions/messages'
-//
+
 class UserList extends React.Component {
-//
+
 //   constructor(props) {
 //     super(props)
 //     this.state = this.initialState
@@ -16,7 +15,7 @@ class UserList extends React.Component {
 //   get initialState() {
 //     return this.getStateFromStore()
 //   }
-//
+// //
 //   getStateFromStore() {
 //     const allMessages = Msgs.getMsgs()
 //
@@ -46,7 +45,7 @@ class UserList extends React.Component {
 //   changeOpenChat(id) {
 //     MessagesAction.changeOpenChat(id)
 //   }
-//
+
   render() {
 //     this.state.messageList.sort((a, b) => {
 //       if (a.lastMessage.timestamp > b.lastMessage.timestamp) {
@@ -120,6 +119,6 @@ class UserList extends React.Component {
     //     </ul>
     //   </div>
     // )
-  }
+}
 
 export default UserList

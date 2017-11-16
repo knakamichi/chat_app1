@@ -36,7 +36,7 @@ export default {
           const json = JSON.parse(res.text)
           Dispatcher.handleServerAction({
             type: ActionTypes.POST_MSGS,
-            messageContent,
+            // messageContent,
             json,
           })
         } else {

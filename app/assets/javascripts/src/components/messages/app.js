@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './header'
 import UserList from './userList'
 import MessagesBox from './messagesBox'
 

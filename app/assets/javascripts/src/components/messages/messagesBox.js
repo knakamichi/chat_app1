@@ -1,5 +1,5 @@
 import React from 'react'
-// import classNames from 'classNames'
+import classNames from 'classNames'
 import Msgs from '../../stores/Msgs'
 import ReplyBox from '../../components/messages/replyBox'
 // // import UserStore from '../../stores/user'
@@ -11,12 +11,11 @@ class MessagesBox extends React.Component {
     this.state = this.initialState
   }
   get initialState() {
-  // 変更箇所、開始位置
     return this.getStateFromStore()
   }
   getStateFromStore() {
     return {
-      messages: Msgs.getMsgs(),
+      messages: Msgs.getMsgs,
     }
     // return MessagesStore.getChatByUserID(MessagesStore.getOpenChatUserID())   // 変更しろ！（openchat関連）
   }
@@ -50,12 +49,12 @@ class MessagesBox extends React.Component {
     //       </li>
     //     )
     // })
-    //
+    // //
     // const lastMessage = this.state.messages[messagesLength - 1]
-
-    // if (lastMessage.from === currentUserID) {
+    //
+    // // if (lastMessage.from === currentUserID) {
     // if (this.state.lastAccess.recipient >= lastMessage.timestamp) {
-    //   const date = Utils.getShortDate(lastMessage.timestamp)
+    //   // const date = Utils.getShortDate(lastMessage.timestamp)
     //   messages.push(
     //         <li key='read' className='message-box__item message-box__item--read'>
     //           <div className='message-box__item__contents'>
@@ -64,11 +63,10 @@ class MessagesBox extends React.Component {
     //         </li>
     //       )
     // }
-    // }
+
     return (
         <div className='message-box'>
           <ul className='message-box__list'>
-            // { messages }
           </ul>
           <ReplyBox />,
         </div>

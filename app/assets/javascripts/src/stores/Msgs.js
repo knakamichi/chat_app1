@@ -2,7 +2,6 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
 import {ActionTypes} from '../constants/app'
-// import MessagesAction from '../actions/messages'
 
 class MsgsStore extends BaseStore {
   addChangeListener(callback) {
@@ -11,7 +10,7 @@ class MsgsStore extends BaseStore {
   removeChangeListener(callback) {
     this.off('change', callback)
   }
-// debugger
+
   getMsgs() {
     if (!this.get('MsgsJson')) this.setMsgs([])
     return this.get('MsgsJson')
@@ -20,23 +19,22 @@ class MsgsStore extends BaseStore {
   setMsgs(array) {
     this.set('MsgsJson', array)
   }
-
-  // postMsgs(messagesContent) {
-  //   this.postMsgs('MsgsJson', messagesContent)
-  // }
 }
+
 const Msgs = new MsgsStore()
 
 Msgs.dispatchToken = Dispatcher.register(payload => {
   const action = payload.action
 
-  switch (action.type) {
+  switch (action.type) {      // action.type = payload の中の action の種類。(line 40)
     case ActionTypes.GET_MSGS:
-      Msgs.getMsgs(action.json)
+      Msgs.setMsgs(action.json)   // ストアのデータを変えてるから set ここのjson はdb 内の全部のデータ
       Msgs.emitChange()
       break
 
     case ActionTypes.POST_MSGS:
+      // すでにあるデータに書き加えるメソッド
+      Msgs.setMsgs(action.json) // ストアにdispaecherから送られた、つまり action から送ったjson をsetする
       Msgs.emitChange()
       break
   }
