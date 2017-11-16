@@ -1,4 +1,4 @@
-!!!
+!!! 5
 %html
   %head
     %title= full_title(yield(:title))
@@ -7,10 +7,12 @@
     = javascript_include_tag 'application'
     = javascript_include_tag '/assets/javascripts/boot.js'
     = csrf_meta_tags
-    #if notice
-      .alert alert.info= notice
-    #if alert
-      .alert alert.warning= alert
   %body
     =render 'layouts/header'
-      = yield
+    .container
+    -if notice
+      %p.alert.alert-info= notice
+    -if alert
+      %p.alert.alert-warning = alert
+
+    = yield

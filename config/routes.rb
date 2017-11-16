@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-namespace :api, { format: 'json' } do
-  resources :messages
-end
+devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
-  resources :messages
-  root to: 'messages#index'
+  namespace :api, { format: 'json' } do
+    resources :messages
+
+  end
+
+root to: 'messages#index'
+
 end
