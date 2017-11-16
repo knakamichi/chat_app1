@@ -23,8 +23,8 @@ class MsgsStore extends BaseStore {
 
 const Msgs = new MsgsStore()
 
-Msgs.dispatchToken = Dispatcher.register(payload => {
-  const action = payload.action
+Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から payloadの形でアクションデータをもらう
+  const action = payload.action       // action に payload中のaction, つまり getMsgs か postMsgsを読む。
 
   switch (action.type) {      // action.type = payload の中の action の種類。(line 40)
     case ActionTypes.GET_MSGS:

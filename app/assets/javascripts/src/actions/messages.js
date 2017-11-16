@@ -34,7 +34,7 @@ export default {
       .end((error, res) => {
         if (!error && res.status === 200) {
           const json = JSON.parse(res.text)
-          Dispatcher.handleServerAction({
+          Dispatcher.handleServerAction({ // dispatcherに {}引数のアクションを知らせる
             type: ActionTypes.POST_MSGS,
             // messageContent,
             json,
