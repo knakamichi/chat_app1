@@ -1,0 +1,18 @@
+%header.navbar navbar-fixed-top navbar-inverse
+  .container= link_to "ChatApp", root_path, id: "logo"
+    %nav
+      %ul.nav navbar-nav navbar-right
+        %li= link_to "Home", root_path
+        -if user_signed_in?
+        %li= link_to "ユーザーを探す", -#createuserpagepath
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Account
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to "マイページ", -#createuserpagepath
+            %li= link_to "ログアウト", destroy_user_session_path, method: :delete
+            %li.divider
+        -else
+          %li= link_to "Login", new_user_session_path
+          %li= link_to "Sign Up", new_user_registration_path
