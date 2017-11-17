@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classNames'
+// import classNames from 'classNames'
 import Msgs from '../../stores/Msgs'
 import ReplyBox from '../../components/messages/replyBox'
 // // import UserStore from '../../stores/user'
@@ -29,26 +29,25 @@ class MessagesBox extends React.Component {
     this.setState(this.getStateFromStore())
   }
 
-  render() {
-
+render() {
     // const messagesLength = this.state.messages.length
     // const currentUserID = UserStore.user.id
 
-    const messages = .map((message, index) => {
-    //   const messageClasses = classNames({
-    //     'message-box__item': true,
-    //     'message-box__item--from-current': true,
-    //     'clear': true,
-    //   })
-    // //
-    //   return (
-    //       <li key={ message.timestamp + '-' + message.from } className={ messageClasses }>
-    //         <div className='message-box__item__contents'>
-    //           { message.contents }
-    //         </div>
-    //       </li>
-    //     )
-    })
+    // const messages = .map((message, index) => {
+    // //   const messageClasses = classNames({
+    // //     'message-box__item': true,
+    // //     'message-box__item--from-current': true,
+    // //     'clear': true,
+    // //   })
+    // // //
+    // //   return (
+    // //       <li key={ message.timestamp + '-' + message.from } className={ messageClasses }>
+    // //         <div className='message-box__item__contents'>
+    // //           { message.contents }
+    // //         </div>
+    // //       </li>
+    // //     )
+    // })
     // //
     // const lastMessage = this.state.messages[messagesLength - 1]
     //
@@ -63,15 +62,15 @@ class MessagesBox extends React.Component {
     //         </li>
     //       )
 
-    return (
+  return (
         <div className='message-box'>
           <ul className='message-box__list'>
-            { messages }
+
           </ul>
           <ReplyBox />,
         </div>
       )
-  }
+}
 }
 
 export default MessagesBox

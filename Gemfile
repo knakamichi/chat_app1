@@ -15,6 +15,9 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 4.2'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

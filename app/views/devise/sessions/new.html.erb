@@ -1,10 +1,11 @@
+<h2 class= "page-title">ログイン</h2>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group clearfix">
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 
-  <div class="form-group clearfix">
+  <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>

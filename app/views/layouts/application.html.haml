@@ -8,11 +8,13 @@
     = javascript_include_tag '/assets/javascripts/boot.js'
     = csrf_meta_tags
   %body
+  -if user_signed_in?
     =render 'layouts/header'
-    .container
-    -if notice
-      %p.alert.alert-info= notice
-    -if alert
-      %p.alert.alert-warning= alert
+  .container
+    =render 'layouts/alertmessages'
+  -# -if notice
+  -#   %p.alert.alert-info= notice
+  -# -if alert
+  -#   %p.alert.alert-warning= alert
 
-    = yield
+  = yield

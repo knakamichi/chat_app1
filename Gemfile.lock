@@ -75,6 +75,9 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.4.0)
+      devise (>= 3.1)
+    devise-i18n-views (0.3.7)
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -224,6 +227,8 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise (~> 4.2)
+  devise-i18n
+  devise-i18n-views
   erb2haml
   haml-rails
   jbuilder (~> 2.0)
