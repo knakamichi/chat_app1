@@ -17,6 +17,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 4.2'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'searchkick'
 
 
 group :development, :test do

@@ -34,7 +34,8 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
 
     case ActionTypes.POST_MSGS:
       // すでにあるデータに書き加えるメソッド
-      Msgs.setMsgs(action.json) // ストアにdispaecherから送られた、つまり action から送ったjson をsetする
+      // Msgs.setMsgs(action.json) // ストアにdispacherから送られた、つまり action から送ったjson をsetする
+      Msgs.push(action.json)
       Msgs.emitChange()
       break
   }

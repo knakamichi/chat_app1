@@ -9,7 +9,7 @@ export default class MessageRouter extends BaseRouter {
   }
 
   decorateApp(ctx, next) {
-    (new ReactDecorator()).decorate('react-main', App)
+    (new ReactDecorator()).decorate('react-main', App)  // react-main に App を decorateしろ〜
     MessageAction.getMsgs()                             // ここでルーティングしてsql dbからデータをとるアクションを行う。
     next()
   }

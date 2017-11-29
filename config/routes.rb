@@ -1,20 +1,18 @@
 Rails.application.routes.draw do
 
-  get 'users/index'
-
-  get 'users/show'
-
 devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
     registrations: 'users/registrations',
     confirmations: 'users/confirmations'
   }
-  resources :users, :only => [:show]
 
   namespace :api, { format: 'json' } do
     resources :messages
+    resources :users
   end
+
+  get '/users/search', to: 'users#search'
 
   resources :users do
     member do
@@ -24,7 +22,7 @@ devise_for :users, controllers: {
 
   resources :relationships, only: [:create, :destroy]
 
-  root to: 'messages#index'
 
+  root to: 'messages#index'
 
 end

@@ -3,7 +3,7 @@
     = link_to "ChatApp", root_path, id: "logo"
     %nav
       %ul.nav.navbar-nav.navbar-right
-        -# %li= link_to "ユーザーを探す"
+        %li= link_to "ユーザー検索", users_search_path
         %li= link_to "Messages", root_path
         -if user_signed_in?
           %li.dropdown
