@@ -21,6 +21,7 @@ export default {
       })
     })
   },
+  // debugger
   loadSearchUsers() {
     return new Promise((resolve, reject) => {
       request

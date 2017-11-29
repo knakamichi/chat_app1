@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%")
+  end
   # Follows a user.
   def follow(other_user)
     following << other_user
