@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classNames'
 import Msgs from '../../stores/Msgs'
 import ReplyBox from '../../components/messages/replyBox'
-// // import UserStore from '../../stores/user'
+// import UserStore from '../../stores/user'
 // import Utils from '../../utils'
 
 class MessagesBox extends React.Component {
@@ -34,7 +34,7 @@ render() {
   const messages = this.state.messages.map(message => {
     const messageClasses = classNames({
       'message-box__item': true,
-      'message-box__item--from-current': message.user_id === current_user.id,
+      // 'message-box__item--from-current': message.user_id === current_user.id,
       'clear': true,
     })
     return (

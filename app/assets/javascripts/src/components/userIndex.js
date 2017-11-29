@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import UserStore from '../../stores/user'
+import UserStore from '../stores/userStore'
 // import Utils from '../../utils'
 
 export default class UserList extends React.Component {
