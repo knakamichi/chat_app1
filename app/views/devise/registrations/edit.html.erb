@@ -1,5 +1,5 @@
 <div class="body">
-<h2 class= "page-title">プロフィール編集 </h2>
+<h2 class= "page-title">Edit Profile </h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -37,16 +37,16 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "更新" %>
+    <%= f.submit "Submit" %>
   </div>
 <% end %>
 
-<h3 class="field">アカウント削除</h3>
+<h3 class="field">Delete Account</h3>
 
-<div class= "actions"><%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></div>
+<div class= "actions"><%= button_to "Delete Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></div>
 
 <div class="actions">
-  <%= link_to "戻る", :back %>
+  <%= link_to "back", :back %>
 </div>
 
 </div>
