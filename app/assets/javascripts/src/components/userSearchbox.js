@@ -14,7 +14,7 @@ export default class Search extends React.Component {
     }
   }
   handleChange(e) {
-    UsersAction.loadSearchUsers(this.state.value)
+    UsersAction.searchUsers(this.state.value)
     this.setState({
       searchString: e.target.value,
     })
@@ -24,7 +24,7 @@ export default class Search extends React.Component {
     const {searchString} = this.state
     return (
       <div className='form-title'>
-        <h2>ユーザー検索</h2>
+        <h2>Search Friends</h2>
       <div className='form-wrapper'>
         <input type='text'
                   value={searchString}

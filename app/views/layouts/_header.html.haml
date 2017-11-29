@@ -3,7 +3,7 @@
     = link_to "ChatApp", root_path, id: "logo"
     %nav
       %ul.nav.navbar-nav.navbar-right
-        %li= link_to "ユーザー検索", users_search_path
+        %li= link_to "Search Friends", users_search_path
         %li= link_to "Messages", root_path
         -if user_signed_in?
           %li.dropdown
@@ -11,6 +11,6 @@
               =@current_user
               %b.caret
             %ul.dropdown-menu
-              %li= link_to "マイページ", current_user
-              %li= link_to "ログアウト", destroy_user_session_path, method: :delete
+              %li= link_to "Profile", current_user
+              %li= link_to "Logout", destroy_user_session_path, method: :delete
               %li.divider

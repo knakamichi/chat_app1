@@ -3,8 +3,8 @@ import keyMirror from 'keymirror'
 export const ActionTypes = keyMirror({
   GET_MSGS: null,
   POST_MSGS: null,
-  LOAD_USERS: null,
-  LOAD_SEARCH_USERS: null,
+  GET_USERS: null,
+  SEARCH_USERS: null,
 })
 
 export function CSRFToken() {

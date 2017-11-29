@@ -18,12 +18,12 @@ const User = new UserStore()
 User.dispatcherToken = Dispatcher.register(payload => {
   const action = payload.action
   switch (action.type) {
-    // case 'loadUsers':
-    //   User.setUsers(action.json)
-    //   User.emitChange()
-    //   break
+    case ActionTypes.GET_USERS:
+      User.setUsers(action.json)
+      User.emitChange()
+      break
 
-    case ActionTypes.LOAD_SEARCH_USERS:
+    case ActionTypes.SEARCH_USERS:
       User.setUsers(action.json)
       User.emitChange()
       break
