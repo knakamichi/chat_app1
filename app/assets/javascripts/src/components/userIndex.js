@@ -53,11 +53,11 @@ export default class UserList extends React.Component {
         {
           _.map(allUsers, (user) => {
             return (
-              <div key={user.id}>
+              <div className='userIndex' key={user.id}>
                 <li>
                   <form action='/' method='get'>
                   <input name='user_id' key={user.id} type='hidden' />
-                  <input type='submit' value={user.name} />
+                  <input type='submit' value={user.name} id='users' />
                   </form>
                 </li>
               </div>

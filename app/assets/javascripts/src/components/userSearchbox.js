@@ -31,7 +31,6 @@ export default class Search extends React.Component {
                   onChange={this.handleChange.bind(this)}
                   id='search'
             />
-          <input type='submit' value='go' id='submit'/>
             <UserIndex {...this.state} />
         </div>
       </div>
