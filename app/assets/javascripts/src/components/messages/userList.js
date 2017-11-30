@@ -7,18 +7,18 @@ import React from 'react'
 
 class UserList extends React.Component {
 
-//   constructor(props) {
-//     super(props)
-//     this.state = this.initialState
-//   }
-// //
+  constructor(props) {
+    super(props)
+    this.state = this.initialState
+  }
+//
 //   get initialState() {
 //     return this.getStateFromStore()
 //   }
 // //
 //   getStateFromStore() {
 //     const allMessages = Msgs.getMsgs()
-//
+
 //     const messageList = []
 //     _.each(allMessages, (message) => {
 //       const messagesLength = message.messages.length

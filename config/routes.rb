@@ -10,19 +10,17 @@ devise_for :users, controllers: {
   namespace :api, { format: 'json' } do
     resources :messages
     resources :users
+    resources :relationships,  only: [:create, :destroy]
   end
 
   get '/users/search', to: 'users#search'
 
   resources :users do
-    member do
+     member do
       get :following, :followers
-    end
-  end
-
-  resources :relationships, only: [:create, :destroy]
-
-
+     end
+   end
+  
   root to: 'messages#index'
 
 end

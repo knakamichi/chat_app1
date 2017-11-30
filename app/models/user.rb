@@ -3,10 +3,16 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :following, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :active_relationships,                           # looks for the Relationhip model
+            class_name: "Relationship",
+            foreign_key: "follower_id",                   # id to connect two different tables; looks for the "follower_id"column
+            dependent: :destroy
+  has_many :passive_relationships,
+            class_name:  "Relationship",
+            foreign_key: "followed_id",
+            dependent: :destroy
+  has_many :following, through: :active_relationships, source: :follower       # see notes
+  has_many :followers, through: :passive_relationships, source: :followed
 
   def self.search(search)
     where("name LIKE ?", "%#{search}%")
