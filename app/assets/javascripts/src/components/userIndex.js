@@ -65,8 +65,8 @@ export default class UserList extends React.Component {
             return (
               <div className='userIndex' key={user.id}>
                 <li>
-                  <form onClick={this.onClick.bind(this, user.id)}> // onClick で user.id の情報をeventに渡してくれ
-                  <input name='user_id' key={user.id} type='hidden' />    // ここで渡されてる情報は user.id (key より)
+                  <form onClick={this.onClick.bind(this, user.id)}>
+                  <input name='user_id' key={user.id} type='hidden' />
                   <input type='submit' value={user.name} id='users' />
                   </form>
                 </li>
@@ -78,3 +78,6 @@ export default class UserList extends React.Component {
     )
   }
 }
+
+// line 68 <form onClick={this.onClick.bind(this, user.id)}> => onClick で user.id の情報をeventに渡してくれ
+// line 69<input name='user_id' key={user.id} type='hidden' />  ここで渡されてる情報は user.id (key より)
