@@ -24,6 +24,7 @@ export default class UserList extends React.Component {
 
   getStateFromStore() {
     return {user: UserStore.getUsers()}
+    // return {user: UserStore.getSearchUsers()}
   }
 
   componentDidMount() {
@@ -40,15 +41,16 @@ export default class UserList extends React.Component {
 
   onClick(userId) { // onClick のevent には user.id (camelcase で記載)を渡す
     // e.preventDefault()
-    UsersAction.followUsers(userId) .then(() => {
-      window.location.href = '/'
+    UsersAction.followUsers(userId).then(() => {
+      location.href = 'http://localhost:3000/'
     })
   }
 
   render() {
     const {user} = this.state
+      // stores the data from the userStore (this.state) as the users property
     const {searchString} = this.props
-
+      // stores the typed letters (this.props) in the searchString property
     let allUsers = user
     const searchUser = searchString.trim().toLowerCase()   // whats the meaning of this code?
 
@@ -56,6 +58,9 @@ export default class UserList extends React.Component {
       allUsers = _.filter(allUsers, (user) => {
         return user.name.toLowerCase().match(searchUser)
       })
+    }
+    else {
+      return null
     }
 
     return (

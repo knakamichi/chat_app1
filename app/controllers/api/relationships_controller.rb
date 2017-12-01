@@ -5,6 +5,7 @@ module Api
       @user = User.find(params[:followed_id])
       # params = 渡ってきた情報の中の[]にある名前の情報を探してくれ
       follow = current_user.follow(@user)
+      follow.save
       render json: follow
     end
 

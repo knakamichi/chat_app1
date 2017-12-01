@@ -41,8 +41,7 @@ export default {
     })
   },
 
-  followUsers(userId)   // userId という情報をこのアクションの中に投入してくれ
-  {
+  followUsers(userId) {  // userId という情報をこのアクションの中に投入してくれ
     return new Promise((resolve, reject) => {
       request
       .post(`${APIEndpoints.RELATIONSHIPS}`)

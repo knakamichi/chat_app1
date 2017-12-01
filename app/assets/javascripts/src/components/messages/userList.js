@@ -4,20 +4,21 @@ import React from 'react'
 // import Utils from '../../utils'
 // import Msgs from '../../stores/Msgs'
 // import MessagesAction from '../../actions/messages'
+// import UserStore from '../../stores/userStore'
 
 class UserList extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = this.initialState
-  }
-//
+//   constructor(props) {
+//     super(props)
+//     this.state = this.initialState
+//   }
+// //
 //   get initialState() {
 //     return this.getStateFromStore()
 //   }
-// //
+//
 //   getStateFromStore() {
-//     const allMessages = Msgs.getMsgs()
+//     const allUsers= UserStore.getUsers()
 
 //     const messageList = []
 //     _.each(allMessages, (message) => {
