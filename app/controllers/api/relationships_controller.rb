@@ -6,7 +6,7 @@ module Api
       # params = 渡ってきた情報の中の[]にある名前の情報を探してくれ
       follow = current_user.follow(@user)
       follow.save
-      render json: follow
+      render json: follow　# 実際にjson で送るのは Relationship 全てのデータ？
     end
 
     def destroy

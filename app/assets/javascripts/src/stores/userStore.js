@@ -3,6 +3,12 @@ import BaseStore from '../base/store'
 import {ActionTypes} from '../constants/app'
 
 class UserStore extends BaseStore {
+  addChangeListener(callback) {
+    this.on('change', callback)
+  }
+  removeChangeListener(callback) {
+    this.off('change', callback)
+  }
 
   getUsers() {
     if (!this.get('usersJson')) this.setUsers([])

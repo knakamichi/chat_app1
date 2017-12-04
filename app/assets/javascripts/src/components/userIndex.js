@@ -5,7 +5,7 @@ import UsersAction from '../actions/users'
 // import { withRouter } from 'react-router-dom'
 // import Utils from '../../utils'
 
-export default class UserList extends React.Component {
+export default class UserIndex extends React.Component {
   static get propTypes() {
     return {
       searchString: React.PropTypes.string,
@@ -58,8 +58,7 @@ export default class UserList extends React.Component {
       allUsers = _.filter(allUsers, (user) => {
         return user.name.toLowerCase().match(searchUser)
       })
-    }
-    else {
+    } else {
       return null
     }
 

@@ -1,24 +1,34 @@
 import React from 'react'
-// import _ from 'lodash'
-// import classNames from 'classnames'
+import _ from 'lodash'
+import classNames from 'classnames'
 // import Utils from '../../utils'
 // import Msgs from '../../stores/Msgs'
 // import MessagesAction from '../../actions/messages'
-// import UserStore from '../../stores/userStore'
+import UserStore from 'assets/src/stores/userStore'
+// import UserAction from '../../actions/users'
 
 class UserList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = this.initialState
+    this.onChangeHandler = this.onStoreChange.bind(this)
+  }
 
-//   constructor(props) {
-//     super(props)
-//     this.state = this.initialState
-//   }
-// //
-//   get initialState() {
-//     return this.getStateFromStore()
-//   }
-//
-//   getStateFromStore() {
-//     const allUsers= UserStore.getUsers()
+  get initialState() {
+    return this.getStateFromStore()
+  }
+  getStateFromStore() {
+    const allFollowing = UserStore.getUsers()
+  }
+  componentWillMount() {
+    UserStore.onChange(this.onChangeHandler)
+  }
+  componentWillUnmount() {
+    UserStore.offChange(this.onChangeHandler)
+  }
+  onStoreChange() {
+    UserStore.setState(this.getStateFromStore())
+  }
 
 //     const messageList = []
 //     _.each(allMessages, (message) => {
@@ -78,48 +88,41 @@ class UserList extends React.Component {
 //       //   isNewMessage = message.lastMessage.from !== UserStore.user.id
 //       // }
 //
-//       const itemClasses = classNames({
-//         'user-list__item': true,
-//         'clear': true,
-//         'user-list__item--new': isNewMessage,
-//         // 'user-list__item--active': this.state.openChatID === message.user.id,
-//       })
+    const itemClasses = classNames({
+      'user-list__item': true,
+      'clear': true,
+        // 'user-list__item--new': isNewMessage,
+        // 'user-list__item--active': this.state.openChatID === message.user.id,
+    })
 //
     return (
-        // <li
-        //   // onClick={ this.changeOpenChat.bind(this, message.user.id) }
-        //   className={ itemClasses }
-        //   key={ message.user.id }
-        // >
-        //   <div className='user-list__item__picture'>
-        //     <img src={ message.user.profilePicture } />
-        //   </div>
-        //   <div className='user-list__item__details'>
-        //     <h4 className='user-list__item__name'>
-        //       { message.user.name }
-        //       <abbr className='user-list__item__timestamp'>
-        //         { date }
-        //       </abbr>
-        //     </h4>
-        //     <span className='user-list__item__message'>
-        //       { statusIcon } { message.lastMessage.contents }
-        //     </span>
-        //   </div>
-        // </li>
+      <li
+        className={ itemClasses }
+        key={followed.id}
+      >
+          // <div className='user-list__item__picture'>
+          //      <img src={ message.user.profilePicture } />
+          // </div>
+        <div className='user-list__item__details'>
+          <h4 className='user-list__item__name'>
+            { followed.id }
+              // <abbr className='user-list__item__timestamp'>
+              //      { date }
+              // </abbr>
+          </h4>
+            // <span className='user-list__item__message'>
+            //      { statusIcon } { message.lastMessage.contents }
+            // </span>
+        </div>
         <div className='user-list'>
           <ul className='user-list__list'>
-
+            // { messages }
           </ul>
         </div>
-      )
+      </li>
+    )
   }
-    // return (
-    //   <div className='user-list'>
-    //     <ul className='user-list__list'>
-    //       { messages }
-    //     </ul>
-    //   </div>
-    // )
 }
-
 export default UserList
+
+// onClick={ this.changeOpenChat.bind(this, message.user.id) } originally on line after <li
