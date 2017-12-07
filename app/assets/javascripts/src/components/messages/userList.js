@@ -2,9 +2,9 @@ import React from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 // import Utils from '../../utils'
-// import Msgs from '../../stores/Msgs'
+import Msgs from '../../stores/Msgs'
 // import MessagesAction from '../../actions/messages'
-import UserStore from 'assets/src/stores/userStore'
+import UserStore from '../../stores/userStore'
 // import UserAction from '../../actions/users'
 
 class UserList extends React.Component {
@@ -18,7 +18,13 @@ class UserList extends React.Component {
     return this.getStateFromStore()
   }
   getStateFromStore() {
-    const allFollowing = UserStore.getUsers()
+    // const users = UserStore.getUsers()
+    return {
+      users: UserStore.getUsers(),
+      // usersId: Msgs.getUserId(),
+      // currentUser,
+      // currentUserId,
+    }
   }
   componentWillMount() {
     UserStore.onChange(this.onChangeHandler)
@@ -29,6 +35,94 @@ class UserList extends React.Component {
   onStoreChange() {
     UserStore.setState(this.getStateFromStore())
   }
+
+  // changeOpenChat(userId) {
+  //   // MessagesAction.loadUserMessages(userId)
+  //   // const userChatAccess = this.getLastAccess(userId)
+  //   // if (userChatAccess) {
+  //   //   MessagesAction.updateLastAccess(userId, new Date())
+  //   // } else {
+  //   //   MessagesAction.createLastAccess(userId, new Date())
+  //   // }
+  //   // CurrentUserAction.loadCurrentUser()
+  // }
+
+  // getLastAccess(toUserId) {
+  //   const {currentUser} = this.state
+  //   const lastAccess = _.find(currentUser.accesses, {to_user_id: toUserId})
+  //   return lastAccess
+  // }
+
+  onClickHandler(userId){
+    UsersAction.followUsers(userId)
+  }
+
+render() {
+  const {users} = this.state
+
+  const friendUsers = _.map(users, (user) => {
+    // const messageLength = user.messages.length
+    // const lastMessage = user.messages[messageLength - 1]
+    // const userChatAccess = this.getLastAccess(user.id)
+    // let newMessageIcon
+    // if (lastMessage) {
+    //   if (!userChatAccess || lastMessage.created_at > userChatAccess.last_access) {
+    //     newMessageIcon = (
+    //       <i className='fa fa-circle new-message-icon' />
+    //     )
+    //   }
+    // }
+
+    const itemClasses = classNames({
+      'user-list__item': true,
+      'clear': true,
+      'user-list__item--active': user.id,
+    })
+    return (
+      <li
+        key={user.id}
+        className={itemClasses}
+      >
+
+      <form onClick={this.onClickHandler.bind(this, user.id)}>
+          <input
+            name='user_id'
+            key={user.id}
+            type='hidden'
+            value='delete'
+            />
+          <input
+            type='submit'
+            value='&#xf057;'
+            className='remove-chat-btn'
+            />
+        </form>
+      { // <div className='user-list__item__picture'>
+        //   <img src={user.image ? '/user_images/' + user.image : '/assets/images/default_image.jpg'} />
+        // </div>
+      }
+        <div className='user-list__item__details'>
+          <div className='user-list__item__name'>
+          {
+            // {newMessageIcon}
+          }
+            <a href={`users/${user.id}`} className='user-list-name'>{user.name}</a>
+          </div>
+        </div>
+      </li>
+    )
+  }, this)
+
+  return (
+      <div className='user-list'>
+        <ul className='user-list__list'>
+          {friendUsers}
+         </ul>
+      </div>
+    )
+}
+}
+export default UserList
 
 //     const messageList = []
 //     _.each(allMessages, (message) => {
@@ -57,7 +151,7 @@ class UserList extends React.Component {
 //     MessagesAction.changeOpenChat(id)
 //   }
 
-  render() {
+  // render() {
 //     this.state.messageList.sort((a, b) => {
 //       if (a.lastMessage.timestamp > b.lastMessage.timestamp) {
 //         return -1
@@ -87,42 +181,6 @@ class UserList extends React.Component {
 //       // if (message.lastAccess.currentUser < message.lastMessage.timestamp) {
 //       //   isNewMessage = message.lastMessage.from !== UserStore.user.id
 //       // }
-//
-    const itemClasses = classNames({
-      'user-list__item': true,
-      'clear': true,
-        // 'user-list__item--new': isNewMessage,
-        // 'user-list__item--active': this.state.openChatID === message.user.id,
-    })
-//
-    return (
-      <li
-        className={ itemClasses }
-        key={followed.id}
-      >
-          // <div className='user-list__item__picture'>
-          //      <img src={ message.user.profilePicture } />
-          // </div>
-        <div className='user-list__item__details'>
-          <h4 className='user-list__item__name'>
-            { followed.id }
-              // <abbr className='user-list__item__timestamp'>
-              //      { date }
-              // </abbr>
-          </h4>
-            // <span className='user-list__item__message'>
-            //      { statusIcon } { message.lastMessage.contents }
-            // </span>
-        </div>
-        <div className='user-list'>
-          <ul className='user-list__list'>
-            // { messages }
-          </ul>
-        </div>
-      </li>
-    )
-  }
-}
-export default UserList
 
+// lines 97-153: originally after onStoreChange
 // onClick={ this.changeOpenChat.bind(this, message.user.id) } originally on line after <li

@@ -1,7 +1,11 @@
 // stores/Msgs.js
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
+import UserStore from './userStore'
+import MessagesAction from '../actions/messages'
 import {ActionTypes} from '../constants/app'
+
+let userId = parseInt(Object.keys(UserStore.getUsers())[0], 10)
 
 class MsgsStore extends BaseStore {
   addChangeListener(callback) {
@@ -9,6 +13,15 @@ class MsgsStore extends BaseStore {
   }
   removeChangeListener(callback) {
     this.off('change', callback)
+  }
+
+  getUserId() {
+    const users = UserStore.getUsers()
+    if (Number.isNaN(userId) && users.length !== 0) {
+      userId = users[0].id
+      MessagesAction.getMsgs()
+    }
+    return userId
   }
 
   getMsgs() {

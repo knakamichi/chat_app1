@@ -39,15 +39,16 @@ export default class UserIndex extends React.Component {
     this.setState(this.getStateFromStore())
   }
 
-  onClick(userId) { // onClick のevent には user.id (camelcase で記載)を渡す
+  onSubmitHandler(userId){
+  // onClick(userId) { // onClick のevent には user.id (camelcase で記載)を渡す
     // e.preventDefault()
-    UsersAction.followUsers(userId).then(() => {
-      location.href = 'http://localhost:3000/'
-    })
-  }
+    UsersAction.followUsers(userId)
+    this.location.replace("/");
+    }
 
   render() {
     const {user} = this.state
+    console.log(user)
       // stores the data from the userStore (this.state) as the users property
     const {searchString} = this.props
       // stores the typed letters (this.props) in the searchString property
@@ -69,7 +70,7 @@ export default class UserIndex extends React.Component {
             return (
               <div className='userIndex' key={user.id}>
                 <li>
-                  <form onClick={this.onClick.bind(this, user.id)}>
+                  <form onClick={this.onSubmitHandler.bind(this, user.id)}>
                   <input name='user_id' key={user.id} type='hidden' />
                   <input type='submit' value={user.name} id='users' />
                   </form>

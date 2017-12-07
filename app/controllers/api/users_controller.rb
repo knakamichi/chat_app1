@@ -7,19 +7,19 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  def following
-    @title = "Following"
-    @user  = User.find(params[:id])
-    @users = @user.following.paginate(page: params[:page]) # 実際にjson で送るのは Relationship 全てのデータ？
-    render json: @users
-  end
-
-  def followers
-    @title = "Followers"
-    @user  = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
-    render json:
-  end
+  # def following
+  #   @title = "Following"
+  #   @user  = User.find(params[:id])
+  #   @users = @user.following.paginate(page: params[:page]) # 実際にjson で送るのは Relationship 全てのデータ？
+  #   render json: @users
+  # end
+  #
+  # def followers
+  #   @title = "Followers"
+  #   @user  = User.find(params[:id])
+  #   @users = @user.followers.paginate(page: params[:page])
+  #   render json: @users
+  # end
 
   end
 end
