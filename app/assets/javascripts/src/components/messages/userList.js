@@ -5,7 +5,8 @@ import classNames from 'classnames'
 import Msgs from '../../stores/Msgs'
 // import MessagesAction from '../../actions/messages'
 import UserStore from '../../stores/userStore'
-// import UserAction from '../../actions/users'
+import FriendStore from '../../stores/friendStore'
+import UserAction from '../../actions/users'
 
 class UserList extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class UserList extends React.Component {
     // const users = UserStore.getUsers()
     return {
       users: UserStore.getUsers(),
+      friends: FriendStore.getFriends()
       // usersId: Msgs.getUserId(),
       // currentUser,
       // currentUserId,
@@ -34,6 +36,7 @@ class UserList extends React.Component {
   }
   onStoreChange() {
     UserStore.setState(this.getStateFromStore())
+    FriendStore.setState(this.getStateFromStore())
   }
 
   // changeOpenChat(userId) {
@@ -58,65 +61,64 @@ class UserList extends React.Component {
   }
 
 render() {
-  const {users} = this.state
-
-  const friendUsers = _.map(users, (user) => {
-    // const messageLength = user.messages.length
-    // const lastMessage = user.messages[messageLength - 1]
-    // const userChatAccess = this.getLastAccess(user.id)
-    // let newMessageIcon
-    // if (lastMessage) {
-    //   if (!userChatAccess || lastMessage.created_at > userChatAccess.last_access) {
-    //     newMessageIcon = (
-    //       <i className='fa fa-circle new-message-icon' />
-    //     )
-    //   }
-    // }
-
-    const itemClasses = classNames({
-      'user-list__item': true,
-      'clear': true,
-      'user-list__item--active': user.id,
-    })
-    return (
-      <li
-        key={user.id}
-        className={itemClasses}
-      >
-
-      <form onClick={this.onClickHandler.bind(this, user.id)}>
-          <input
-            name='user_id'
-            key={user.id}
-            type='hidden'
-            value='delete'
-            />
-          <input
-            type='submit'
-            value='&#xf057;'
-            className='remove-chat-btn'
-            />
-        </form>
-      { // <div className='user-list__item__picture'>
-        //   <img src={user.image ? '/user_images/' + user.image : '/assets/images/default_image.jpg'} />
-        // </div>
-      }
-        <div className='user-list__item__details'>
-          <div className='user-list__item__name'>
-          {
-            // {newMessageIcon}
-          }
-            <a href={`users/${user.id}`} className='user-list-name'>{user.name}</a>
-          </div>
-        </div>
-      </li>
-    )
-  }, this)
+  const {users, friends} = this.state
+  // const friendUsers = _.map(users, (friend) => {
+  //   // const messageLength = user.messages.length
+  //   // const lastMessage = user.messages[messageLength - 1]
+  //   // const userChatAccess = this.getLastAccess(user.id)
+  //   // let newMessageIcon
+  //   // if (lastMessage) {
+  //   //   if (!userChatAccess || lastMessage.created_at > userChatAccess.last_access) {
+  //   //     newMessageIcon = (
+  //   //       <i className='fa fa-circle new-message-icon' />
+  //   //     )
+  //   //   }
+  //   // }
+  //
+  //   const itemClasses = classNames({
+  //     'user-list__item': true,
+  //     'clear': true,
+  //     'user-list__item--active': user.id,
+  //   })
+  //   return (
+  //     <li
+  //       key={user.id}
+  //       className={itemClasses}
+  //     >
+  //
+  //     <form >
+  //         <input
+  //           name='user_id'
+  //           key={user.id}
+  //           type='hidden'
+  //           value='delete'
+  //           />
+  //         <input
+  //           type='submit'
+  //           value='&#xf057;'
+  //           className='remove-chat-btn'
+  //           />
+  //       </form>
+  //     { // <div className='user-list__item__picture'>
+  //       //   <img src={user.image ? '/user_images/' + user.image : '/assets/images/default_image.jpg'} />
+  //       // </div>
+  //     }
+  //       <div className='user-list__item__details'>
+  //         <div className='user-list__item__name'>
+  //         {
+  //           // {newMessageIcon}
+  //         }
+  //           <a href={`users/${user.id}`} className='user-list-name'>{user.name}</a>
+  //         </div>
+  //       </div>
+  //     </li>
+  //   )
+  // }, this)
 
   return (
       <div className='user-list'>
         <ul className='user-list__list'>
-          {friendUsers}
+          // {friendUsers}
          </ul>
       </div>
     )

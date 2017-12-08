@@ -41,6 +41,26 @@ export default {
     })
   },
 
+  getFriends() {  // userId という情報をこのアクションの中に投入してくれ
+    return new Promise((resolve, reject) => {
+      request
+      .get(`${APIEndpoints.users/followers}, ${APIEndpoints.users/followed}`)
+      .set('X-CSRF-Token', CSRFToken())
+      .end((error, res) => {
+        if (!error && res.status === 200) {
+          const json = JSON.parse(res.text)
+          Dispatcher.handleServerAction({
+            type: ActionTypes.GET_FRIENDS,
+            json,
+          })
+          console.log(json);
+        } else {
+        reject(res)
+      }
+    })
+  })
+},
+
   followUsers(userId) {  // userId という情報をこのアクションの中に投入してくれ
     return new Promise((resolve, reject) => {
       request
@@ -50,10 +70,11 @@ export default {
       .end((error, res) => {
         if (!error && res.status === 200) {
           const json = JSON.parse(res.text)
-          Dispatcher.handleServerAction({
-            type: ActionTypes.FOLLOW_USERS,
-            json,
-          })
+          console.log(json);
+          // Dispatcher.handleServerAction({
+          //   type: ActionTypes.FOLLOW_USERS,
+          //   json,
+          // })
         } else {
           reject(res)
         }
