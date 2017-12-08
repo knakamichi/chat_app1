@@ -40,12 +40,7 @@ User.dispatcherToken = Dispatcher.register(payload => {
       User.setUsers(action.json)
       User.emitChange()
       break
-
-    // case ActionTypes.FOLLOW_USERS:
-    //   User.setUsers(action.json)
-    //   User.emitChange()
-    //   break
-
+    
   }
 
   return true

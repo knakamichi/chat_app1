@@ -43,7 +43,7 @@ export default class UserIndex extends React.Component {
   // onClick(userId) { // onClick のevent には user.id (camelcase で記載)を渡す
     // e.preventDefault()
     UsersAction.followUsers(userId)
-    this.location.replace("/");
+    this.window.location.replace('/');
     }
 
   render() {
