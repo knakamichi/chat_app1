@@ -1,12 +1,15 @@
 module Api
   class RelationshipsController < ApplicationController
+    before_action :authenticate_user!
 
     def create
         @user = User.find(params[:followed_id])
       # params = 渡ってきた情報の中の[]にある名前の情報を探してくれ
-        follow = current_user.follow(@user)
-        follow.save # 実際にjson で送るのは Relationship 全てのデータ？
-        render json: follow
+        if @user != current_user
+          follow = current_user.follow(@user)
+          follow.save
+          render json: follow
+        end
     end
 
     def destroy

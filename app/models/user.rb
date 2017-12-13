@@ -11,15 +11,15 @@ class User < ActiveRecord::Base
             class_name:  "Relationship",
             foreign_key: "followed_id",
             dependent: :destroy
-  has_many :following, through: :active_relationships, source: :follower       # railsはfollowingを見てrelationshipsテーブルのfollowed_idを使って対象のユーザーの集合を取得してくる（名前をfollowed に置き換えておいて、しかし元はfolloweds)
-  has_many :followers, through: :passive_relationships, source: :followed     # followers に値する集合の取得
+  has_many :following, through: :active_relationships, source: :followed       # railsはfollowingを見てrelationshipsテーブルのfollowed_idを使って対象のユーザーの集合を取得してくる（名前をfollowed に置き換えておいて、しかし元はfolloweds)
+  has_many :followers, through: :passive_relationships, source: :follower    # followers に値する集合の取得
 
   def self.search(search)
     where("name LIKE ?", "%#{search}%")
   end
 
   def friends
-      following + followers  # 相手からの申請でも自分からの申請でも双方向で友達となる。
+      following + followers  # user.friendsのようにしてuserの全ての友達にアクセス可能
   end
 
   # Follows a user.

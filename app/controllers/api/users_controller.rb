@@ -8,10 +8,10 @@ class UsersController < ApplicationController
   end
 
   def friends
-    # binding.pry
-    @friends = User.where(params[:followed_id])
-    render json: @friends
+    @user = User.find(params[:id])
+    friends = @user.friends
+    render json: friends
   end
 
-  end
+end
 end

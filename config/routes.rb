@@ -10,7 +10,7 @@ devise_for :users, controllers: {
   namespace :api, { format: 'json' } do
     resources :messages
     resources :users do
-      collection do
+      member do
         get :friends
       end
     end

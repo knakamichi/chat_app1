@@ -41,10 +41,10 @@ export default {
     })
   },
 
-  getFriends() {
+  getFriends(current_userId) {
     return new Promise((resolve, reject) => {
       request
-        .get(`${APIEndpoints.USERS}/friends`)
+        .get(`${APIEndpoints.USERS}/${current_userId}/friends`)
         .end((error, res) => {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)
@@ -81,10 +81,11 @@ export default {
         })
     })
   },
+
   deleteFriends(friendId) {
     return new Promise((resolve, reject) => {
       request
-        .post(`${APIEndpoints.RELATIONSHIPS}/`)
+        .post(`${APIEndpoints.RELATIONSHIPS}`)
         .set('X-CSRF-Token', CSRFToken())
         .send({followed_id: friendId})
         .end((error, res) => {
