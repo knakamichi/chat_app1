@@ -18,22 +18,24 @@ class FriendStore extends BaseStore {
   }
 
   setFriends(array) {
-    this.set('friends', array) // friends というkey に値を set array という引数を渡してる。
+    this.set('friends', array) // friends というkey に値を set. array という引数を渡してる。
   }
 }
 
-const Friend = new FriendStore()
+const friendStore = new FriendStore()
 
-Friend.dispatcherToken = Dispatcher.register(payload => {
+friendStore.dispatchToken = Dispatcher.register(payload => {
   const action = payload.action
+
   switch (action.type) {
     case ActionTypes.GET_FRIENDS:
-      Friend.setFriends(action.json)
-      Friend.emitChange()
+      friendStore.setFriends(action.json)
+      friendStore.emitChange()
       break
   }
+
   return true
 })
 
 // window.Friend = Friend
-export default Friend
+export default friendStore

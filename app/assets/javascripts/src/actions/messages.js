@@ -35,7 +35,6 @@ export default {
             const json = JSON.parse(res.text)
             Dispatcher.handleServerAction({ // dispatcherに {}引数のアクションを知らせる
               type: ActionTypes.POST_MSGS,
-              // messageContent,
               json,
             })
           } else {

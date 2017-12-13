@@ -17,7 +17,6 @@ class MessagesBox extends React.Component {
     return {
       messages: Msgs.getMsgs(),
     }
-    // return MessagesStore.getChatByUserID(MessagesStore.getOpenChatUserID())   // 変更しろ！（openchat関連）
   }
   componentWillMount() {
     Msgs.onChange(this.onChangeHandler)

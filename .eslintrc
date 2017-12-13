@@ -8,7 +8,7 @@
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true, 
+      "experimentalObjectRestSpread": true,
       "modules": true
     }
   },
@@ -28,6 +28,7 @@
     "comma-dangle"                : [2, "always-multiline"],
     "space-before-function-paren" : [2, "never"],
     "react/jsx-boolean-value"     : [2, "always"],
-    "react-in-jsx-scope"          : 0
+    "react-in-jsx-scope"          : 0,
+     "no-debugger"                : 0
   }
 }

@@ -44,9 +44,7 @@ export default {
   getFriends() {
     return new Promise((resolve, reject) => {
       request
-        .get(
-          `${APIEndpoints.USERS}/friends`)
-        .set('X-CSRF-Token', CSRFToken())
+        .get(`${APIEndpoints.USERS}/friends`)
         .end((error, res) => {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)
@@ -54,7 +52,8 @@ export default {
               type: ActionTypes.GET_FRIENDS,
               json,
             })
-            console.log(json)
+            // console.log(json)
+            resolve(json)
           } else {
             reject(res)
           }
@@ -76,6 +75,26 @@ export default {
           //   type: ActionTypes.FOLLOW_USERS,
           //   json,
           // })
+          } else {
+            reject(res)
+          }
+        })
+    })
+  },
+  deleteFriends(friendId) {
+    return new Promise((resolve, reject) => {
+      request
+        .post(`${APIEndpoints.RELATIONSHIPS}/`)
+        .set('X-CSRF-Token', CSRFToken())
+        .send({followed_id: friendId})
+        .end((error, res) => {
+          if (!error && res.status === 200) {
+            const json = JSON.parse(res.text)
+            Dispatcher.handleServerAction({
+              type: ActionTypes.GET_FRIENDS,
+              json,
+            })
+            resolve(json)
           } else {
             reject(res)
           }

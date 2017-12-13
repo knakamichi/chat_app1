@@ -5,8 +5,8 @@ import classNames from 'classnames'
 // import Msgs from '../../stores/Msgs'
 // import MessagesAction from '../../actions/messages'
 // import UserStore from '../../stores/userStore'
-import FriendStore from '../../stores/friendStore'
-// import UserAction from '../../actions/users'
+import friendStore from '../../stores/friendStore'
+import UserAction from '../../actions/users'
 
 class UserList extends React.Component {
   constructor(props) {
@@ -20,38 +20,24 @@ class UserList extends React.Component {
   }
   getStateFromStore() {
     return {
-      friends: FriendStore.getFriends(),
+      friends: friendStore.getFriends(),
     }
-  //   return {
-  //     users: UserStore.getUsers(),
-  //     // friends: FriendStore.getFriends()
-  //     // usersId: Msgs.getUserId(),
-  //     // currentUser,
-  //     // currentUserId,
-  //   }
   }
   componentWillMount() {
   //   UserStore.onChange(this.onChangeHandler)
-    FriendStore.onChange(this.onChangeHandler)
+    friendStore.onChange(this.onChangeHandler)
   }
   componentWillUnmount() {
     // UserStore.offChange(this.onChangeHandler)
-    FriendStore.offChange(this.onChangeHandler)
+    friendStore.offChange(this.onChangeHandler)
   }
   onStoreChange() {
   //   UserStore.setState(this.getStateFromStore())
-    FriendStore.setState(this.getStateFromStore())
+    this.setState(this.getStateFromStore())
   }
 
-  // changeOpenChat(userId) {
-  //   // MessagesAction.loadUserMessages(userId)
-  //   // const userChatAccess = this.getLastAccess(userId)
-  //   // if (userChatAccess) {
-  //   //   MessagesAction.updateLastAccess(userId, new Date())
-  //   // } else {
-  //   //   MessagesAction.createLastAccess(userId, new Date())
-  //   // }
-  //   // CurrentUserAction.loadCurrentUser()
+  // changeFriends(friendId) {
+  //
   // }
 
   // getLastAccess(toUserId) {
@@ -60,24 +46,15 @@ class UserList extends React.Component {
   //   return lastAccess
   // }
 
-  // onClickHandler(userId){
-  //   UserAction.followUsers(userId)
-  // }
+  deleteChatConfirm(e) {
+    if (!confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
+      e.preventDefault()
+    }
+    UserAction.deleteFriends()
+  }
 
   render() {
-    const friends = this.state.friends.map(friend => {
-      //   // const messageLength = user.messages.length
-      //   // const lastMessage = user.messages[messageLength - 1]
-      //   // const userChatAccess = this.getLastAccess(user.id)
-      //   // let newMessageIcon
-      //   // if (lastMessage) {
-      //   //   if (!userChatAccess || lastMessage.created_at > userChatAccess.last_access) {
-      //   //     newMessageIcon = (
-      //   //       <i className='fa fa-circle new-message-icon' />
-      //   //     )
-      //   //   }
-      //   // }
-      //
+    const friendUsers = this.state.friends.map(friend => {
       const itemClasses = classNames({
         'user-list__item': true,
         'clear': true,
@@ -88,7 +65,7 @@ class UserList extends React.Component {
           key={friend.id}
           className={itemClasses}
         >
-          <form >
+          <div>
             <input
               name='friend_id'
               key={friend.id}
@@ -97,10 +74,11 @@ class UserList extends React.Component {
             />
             <input
               type='submit'
-              value='&#xf057;'
+              value=''
               className='remove-chat-btn'
+              onClick={this.deleteChatConfirm.bind(this)}
             />
-          </form>
+          </div>
           {
             // <div className='user-list__item__picture'>
             //   <img src={user.image ? '/user_images/' + user.image : '/assets/images/default_image.jpg'} />
@@ -111,7 +89,7 @@ class UserList extends React.Component {
               {
                 // {newMessageIcon}
               }
-              <a href={`users/${friend.id}`} className='user-list-name'>{friend.name}</a>
+              <a className='user-list-name'>{friend.name}</a>
             </div>
           </div>
         </li>
@@ -121,7 +99,7 @@ class UserList extends React.Component {
     return (
       <div className='user-list'>
         <ul className='user-list__list'>
-          {friends}
+          {friendUsers}
         </ul>
       </div>
     )
