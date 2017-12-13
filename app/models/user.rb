@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
   def self.search(search)
     where("name LIKE ?", "%#{search}%")
   end
+
+  def friends
+      following + followers  # 相手からの申請でも自分からの申請でも双方向で友達となる。
+  end
+
   # Follows a user.
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)

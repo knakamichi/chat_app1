@@ -9,10 +9,10 @@ module Api
         render json: follow
     end
 
-    # def destroy
-    #   @user = Relationship.find(params[:id]).followed
-    #   unfollow = current_user.unfollow(@user)
-    #   render json:
-    # end
+    def destroy
+      @user = Relationship.find(params[:id]).followed
+      unfollow = current_user.unfollow(@user)
+      render json: unfollow
+    end
   end
 end

@@ -7,18 +7,10 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  def following
-    @title = "Following"
-    @user  = User.find(params[:id])
-    @users = @user.following
-    render json: @users
-  end
-
-  def followers
-    @title = "Followers"
-    @user  = User.find(params[:id])
-    @users = @user.followers
-    render json: @users
+  def friends
+    # binding.pry
+    @friends = User.where(params[:followed_id])
+    render json: @friends
   end
 
   end

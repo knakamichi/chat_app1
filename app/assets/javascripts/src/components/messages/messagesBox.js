@@ -29,23 +29,23 @@ class MessagesBox extends React.Component {
     this.setState(this.getStateFromStore())
   }
 
-render() {
-  const messages = this.state.messages.map(message => {
-    const messageClasses = classNames({
-      'message-box__item': true,
-      // 'message-box__item--from-current': message.user_id === current_user.id,
-      'clear': true,
+  render() {
+    const messages = this.state.messages.map(message => {
+      const messageClasses = classNames({
+        'message-box__item': true,
+        // 'message-box__item--from-current': message.user_id === current_user.id,
+        'clear': true,
+      })
+      return (
+        <li key={message.id} className={messageClasses}>
+          <div className='message-box__item__contents'>
+            {message.content}
+          </div>
+        </li>
+      )
     })
-    return (
-         <li key={message.id} className={messageClasses}>
-           <div className='message-box__item__contents'>
-             {message.content}
-           </div>
-         </li>
-       )
-  })
 
-  return (
+    return (
       <div className='message-box'>
         <ul className='message-box__list'>
           {messages}
@@ -53,7 +53,7 @@ render() {
         <ReplyBox />,
       </div>
     )
-}
+  }
 }
 
 export default MessagesBox

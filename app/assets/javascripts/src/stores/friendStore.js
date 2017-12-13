@@ -1,8 +1,10 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
+// import UserStore from './userStore'
+// import UserAction from '../actions/users'
 import {ActionTypes} from '../constants/app'
 
-class friendStore extends BaseStore {
+class FriendStore extends BaseStore {
   addChangeListener(callback) {
     this.on('change', callback)
   }
@@ -11,16 +13,16 @@ class friendStore extends BaseStore {
   }
 
   getFriends() {
-    if (!this.get('usersJson')) this.setFriends([])
-    return this.get('usersJson')
+    if (!this.get('friends')) this.setFriends([])
+    return this.get('friends') // friends という key に入ってるものを取って来る（from store)
   }
-  
+
   setFriends(array) {
-    this.setFriends('usersJson', array)
+    this.set('friends', array) // friends というkey に値を set array という引数を渡してる。
   }
 }
 
-const Friend = new friendStore()
+const Friend = new FriendStore()
 
 Friend.dispatcherToken = Dispatcher.register(payload => {
   const action = payload.action
@@ -33,5 +35,5 @@ Friend.dispatcherToken = Dispatcher.register(payload => {
   return true
 })
 
-window.Friend = Friend
+// window.Friend = Friend
 export default Friend
