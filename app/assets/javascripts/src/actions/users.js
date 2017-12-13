@@ -41,10 +41,10 @@ export default {
     })
   },
 
-  getFriends(current_userId) {
+  getFriends() {
     return new Promise((resolve, reject) => {
       request
-        .get(`${APIEndpoints.USERS}/${current_userId}/friends`)
+        .get(`${APIEndpoints.USERS}//friends`)
         .end((error, res) => {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)

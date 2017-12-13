@@ -26,15 +26,15 @@ export default class Search extends React.Component {
     return (
       <div className='form-title'>
         <h2>Search Friends</h2>
-      <div className='form-wrapper'>
-        <input type='text'
-                  value={searchString}
-                  onChange={this.handleChange.bind(this)}
-                  id='search'
-            />
-            <UserIndex {...this.state} />
+        <div className='form-wrapper'>
+          <input type='text'
+            value={searchString}
+            onChange={this.handleChange.bind(this)}
+            id='search'
+          />
+          <UserIndex {...this.state} />
         </div>
       </div>
-   )
+    )
   }
 }

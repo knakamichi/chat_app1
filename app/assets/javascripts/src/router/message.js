@@ -2,7 +2,8 @@ import ReactDecorator from '../base/react_decorator'
 import BaseRouter from '../base/router'
 import App from '../components/messages/app'
 import MessageAction from '../actions/messages'
-import UsersAction from '../actions/users'
+import UserAction from '../actions/users'
+import CurrentUserAction from '../actions/current_user'
 
 export default class MessageRouter extends BaseRouter {
   register() {
@@ -12,7 +13,8 @@ export default class MessageRouter extends BaseRouter {
   decorateApp(ctx, next) {
     (new ReactDecorator()).decorate('react-main', App) // react-main に App を decorateしろ〜
     MessageAction.getMsgs() // ここでルーティングしてsql dbからデータをとるアクションを行う。
-    UsersAction.getFriends()
+    UserAction.getFriends()
+    CurrentUserAction.getCurrentUser()
     next()
   }
 }

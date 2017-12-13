@@ -39,7 +39,7 @@ export default class UserIndex extends React.Component {
     this.setState(this.getStateFromStore())
   }
 
-  onClickHandler(userId){
+  onClickHandler(userId) {
   // onClick(userId) { // onClick のevent には user.id (camelcase で記載)を渡す
     // e.preventDefault()
     UsersAction.followUsers(userId)
@@ -48,12 +48,11 @@ export default class UserIndex extends React.Component {
 
   render() {
     const {user} = this.state
-    console.log(user);
-      // stores the data from the userStore (this.state) as the users property
+    // stores the data from the userStore (this.state) as the users property
     const {searchString} = this.props
-      // stores the typed letters (this.props) in the searchString property
+    // stores the typed letters (this.props) in the searchString property
     let allUsers = user
-    const searchUser = searchString.trim().toLowerCase()   // whats the meaning of this code?
+    const searchUser = searchString.trim().toLowerCase() // whats the meaning of this code?
 
     if (searchUser.length > 0) {
       allUsers = _.filter(allUsers, (user) => {

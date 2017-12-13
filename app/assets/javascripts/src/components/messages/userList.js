@@ -7,6 +7,7 @@ import classNames from 'classnames'
 // import UserStore from '../../stores/userStore'
 import friendStore from '../../stores/friendStore'
 import UserAction from '../../actions/users'
+import CurrentUserStore from '../../stores/current_userStore'
 
 class UserList extends React.Component {
   constructor(props) {
@@ -18,19 +19,33 @@ class UserList extends React.Component {
   get initialState() {
     return this.getStateFromStore()
   }
+
   getStateFromStore() {
-    return {
-      friends: friendStore.getFriends(),
+    const currentUser = CurrentUserStore.getCurrentUser()
+    // if (currentUser.length === 0) return {}
+    const currentUserId = currentUser.id
+    if (currentUserId) {
+      return {
+        currentUser,
+        currentUserId,
+        friends: friendStore.getFriends(),
+      }
+    } else {
+      return {}
     }
   }
+
   componentWillMount() {
   //   UserStore.onChange(this.onChangeHandler)
     friendStore.onChange(this.onChangeHandler)
+    CurrentUserStore.onChange(this.onChangeHandler)
   }
   componentWillUnmount() {
     // UserStore.offChange(this.onChangeHandler)
     friendStore.offChange(this.onChangeHandler)
+    CurrentUserStore.offChange(this.onChangeHandler)
   }
+
   onStoreChange() {
   //   UserStore.setState(this.getStateFromStore())
     this.setState(this.getStateFromStore())
@@ -54,48 +69,50 @@ class UserList extends React.Component {
   }
 
   render() {
-    const friendUsers = this.state.friends.map(friend => {
-      const itemClasses = classNames({
-        'user-list__item': true,
-        'clear': true,
-        'user-list__item--active': friend.id,
-      })
-      return (
-        <li
-          key={friend.id}
-          className={itemClasses}
-        >
-          <div>
-            <input
-              name='friend_id'
-              key={friend.id}
-              type='hidden'
-              value='delete'
-            />
-            <input
-              type='submit'
-              value=''
-              className='remove-chat-btn'
-              onClick={this.deleteChatConfirm.bind(this)}
-            />
-          </div>
-          {
+    var friendUsers = ''
+    if (this.state.friends) {
+      friendUsers = this.state.friends.map(friend => {
+        const itemClasses = classNames({
+          'user-list__item': true,
+          'clear': true,
+          'user-list__item--active': friend.id,
+        })
+        return (
+          <li
+            key={friend.id}
+            className={itemClasses}
+          >
+            <div>
+              <input
+                name='friend_id'
+                key={friend.id}
+                type='hidden'
+                value='delete'
+              />
+              <input
+                type='submit'
+                value=''
+                className='remove-chat-btn'
+                onClick={this.deleteChatConfirm.bind(this)}
+              />
+            </div>
+            {
             // <div className='user-list__item__picture'>
             //   <img src={user.image ? '/user_images/' + user.image : '/assets/images/default_image.jpg'} />
             // </div>
-          }
-          <div className='user-list__item__details'>
-            <div className='user-list__item__name'>
-              {
+            }
+            <div className='user-list__item__details'>
+              <div className='user-list__item__name'>
+                {
                 // {newMessageIcon}
-              }
-              <a className='user-list-name'>{friend.name}</a>
+                }
+                <a className='user-list-name'>{friend.name}</a>
+              </div>
             </div>
-          </div>
-        </li>
-      )
-    })
-
+          </li>
+        )
+      })
+    }
     return (
       <div className='user-list'>
         <ul className='user-list__list'>

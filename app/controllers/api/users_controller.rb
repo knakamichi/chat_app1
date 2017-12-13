@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @user = User.find(params[:id])
-    friends = @user.friends
+    # @user = User.find(params[:id])
+    friends = current_user.friends
     render json: friends
   end
 
