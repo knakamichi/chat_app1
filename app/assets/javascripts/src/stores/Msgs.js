@@ -31,6 +31,10 @@ class MsgsStore extends BaseStore {
   setMsgs(array) {
     this.set('MsgsJson', array)
   }
+
+  pushMsgs(array) {
+    this.getMsgs().push(array)
+  }
 }
 
 const Msgs = new MsgsStore()
@@ -46,7 +50,7 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
 
     case ActionTypes.POST_MSGS:
       // すでにあるデータに書き加えるメソッド
-      Msgs.push(action.json)
+      Msgs.pushMsgs(action.json)
       Msgs.emitChange()
       break
   }
