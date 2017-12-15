@@ -7,9 +7,9 @@ class Api::FriendsController < ApplicationController
    end
 
    def destroy
-     current_user.remove_friend(@friend)
-     head :no_content
-     render json: index
+     current_user.remove_friend(@friend, current_user.id)
+     @friends = current_user.friends
+     render json: @friends
    end
 
    private

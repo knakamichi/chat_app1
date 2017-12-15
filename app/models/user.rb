@@ -41,8 +41,10 @@ class User < ActiveRecord::Base
   #   following.include?(other_user)
   # end
 
-  def remove_friend(friend)
-    current_user.friends.destroy(friend)
+  def remove_friend(friend, current_user_id)
+    current_user = User.where(id: current_user_id)
+    friends = Friendship.where(friend_id: friend, user_id: current_user)
+    friends.destroy(friends)
   end
 
 end

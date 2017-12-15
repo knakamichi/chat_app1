@@ -7,11 +7,11 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  def friends
-    # @user = User.find(params[:id])
-    friends = current_user.friends
-    render json: friends
-  end
+  # def friends
+  #   # @user = User.find(params[:id])
+  #   friends = current_user.friends
+  #   render json: friends
+  # end
 
 end
 end
