@@ -20,4 +20,6 @@ export const APIEndpoints = {
   USERS: APIRoot + '/users',
   RELATIONSHIPS: APIRoot + '/relationships',
   CURRENT_USER: APIRoot + '/current_user',
+  FRIENDS: APIRoot + '/friends',
+  FRIENDREQUEST: APIRoot + '/friendrequest',
 }

@@ -40,14 +40,12 @@ export default class UserIndex extends React.Component {
   }
 
   onClickHandler(userId) {
-  // onClick(userId) { // onClick のevent には user.id (camelcase で記載)を渡す
-    // e.preventDefault()
-    UsersAction.followUsers(userId)
+    UsersAction.sendFriendRequest(userId)
     window.location.href = '/'
   }
 
   render() {
-    const {user} = this.state
+    const {user} = this.state //  user = this.state.user に同じ
     // stores the data from the userStore (this.state) as the users property
     const {searchString} = this.props
     // stores the typed letters (this.props) in the searchString property

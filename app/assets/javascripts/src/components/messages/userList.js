@@ -1,5 +1,5 @@
 import React from 'react'
-// import _ from 'lodash'
+import _ from 'lodash'
 import classNames from 'classnames'
 // import Utils from '../../utils'
 // import Msgs from '../../stores/Msgs'
@@ -47,7 +47,6 @@ class UserList extends React.Component {
   }
 
   onStoreChange() {
-  //   UserStore.setState(this.getStateFromStore())
     this.setState(this.getStateFromStore())
   }
 
@@ -65,13 +64,15 @@ class UserList extends React.Component {
     if (!confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
       e.preventDefault()
     }
-    UserAction.deleteFriends()
+    UserAction.deleteFriends(e)
   }
 
   render() {
     var friendUsers = ''
     if (this.state.friends) {
-      friendUsers = this.state.friends.map(friend => {
+      const {friends} = this.state
+      let allFriends = friends
+      friendUsers = _.map(allFriends, (friend) => {
         const itemClasses = classNames({
           'user-list__item': true,
           'clear': true,
@@ -82,18 +83,17 @@ class UserList extends React.Component {
             key={friend.id}
             className={itemClasses}
           >
-            <div>
+            <div >
               <input
                 name='friend_id'
                 key={friend.id}
                 type='hidden'
-                value='delete'
               />
               <input
                 type='submit'
                 value=''
                 className='remove-chat-btn'
-                onClick={this.deleteChatConfirm.bind(this)}
+                onClick={this.deleteChatConfirm.bind(this, friend.id)}
               />
             </div>
             {

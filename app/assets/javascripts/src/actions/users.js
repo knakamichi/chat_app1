@@ -7,6 +7,7 @@ export default {
     return new Promise((resolve, reject) => {
       request
         .get(`${APIEndpoints.USERS}`)
+        .set('X-CSRF-Token', CSRFToken())
         .end((err, res) => {
           if (!err && res.ok) {
             const json = JSON.parse(res.text)
@@ -26,6 +27,7 @@ export default {
     return new Promise((resolve, reject) => {
       request
         .get(`${APIEndpoints.USERS}`)
+        .set('X-CSRF-Token', CSRFToken())
         .send({searchString})
         .end((error, res) => {
           if (!error && res.status === 200) {
@@ -44,7 +46,8 @@ export default {
   getFriends() {
     return new Promise((resolve, reject) => {
       request
-        .get(`${APIEndpoints.USERS}//friends`)
+        .get(`${APIEndpoints.FRIENDS}`)
+        .set('X-CSRF-Token', CSRFToken())
         .end((error, res) => {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)
@@ -61,12 +64,12 @@ export default {
     })
   },
 
-  followUsers(userId) { // userId という情報をこのアクションの中に投入してくれ
+  sendFriendRequest(userId) { // userId という情報をこのアクションの中に投入してくれ
     return new Promise((resolve, reject) => {
       request
-        .post(`${APIEndpoints.RELATIONSHIPS}`)
+        .post('/friend_requests')
         .set('X-CSRF-Token', CSRFToken())
-        .send({followed_id: userId}) // followed_id という名前でuserIdという名の情報を渡せ
+        .send({friend_id: userId}) // followed_id という名前でuserIdという名の情報を渡せ
         .end((error, res) => {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)
@@ -85,9 +88,9 @@ export default {
   deleteFriends(friendId) {
     return new Promise((resolve, reject) => {
       request
-        .post(`${APIEndpoints.RELATIONSHIPS}`)
+        .delete(`${APIEndpoints.FRIENDS}/${friendId}`)
         .set('X-CSRF-Token', CSRFToken())
-        .send({followed_id: friendId})
+        .send({id: friendId})
         .end((error, res) => {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)
