@@ -1,39 +1,63 @@
 import React from 'react'
-// import Msgs from '../../stores/Msgs'
+import Msgs from '../../stores/Msgs'
 import MessagesAction from '../../actions/messages'
 
 class ReplyBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState
+    this.onChangeHandler = this.onStoreChange.bind(this)
   }
 
-get initialState() {
-  return {
-    value: '',
+  get initialState() {
+    return this.getStateFromStore()
   }
-}
-onSubmit(e) {
-  // if (e.keyCode === 13) {
-  e.preventDefault()      // html経由の入力によって発生する同期処理を止め、非同期処理に移る。
-  MessagesAction.postMsgs(this.state.value)
-  this.setState({
-    value: '',
-  })
-  // }
-  // } else {
-  //   this.setState({
-  //     value: this.state.value + e.key,    意味：入力された値 + 押されたキー ＝ 二重入力
-  //   })
-  // }
-}
+  getStateFromStore() {
+    return {
+      value: '',
+      receiverId: Msgs.getOpenChatUserId(),
+    }
+  }
 
-updateValue(e) {
-  // debugger
-  this.setState({
-    value: e.target.value,
-  })
-}
+  componentDidMount() {
+    Msgs.onChange(this.onChangeHandler)
+  }
+
+  componentWillUnmount() {
+    Msgs.offChange(this.onChangeHandler)
+  }
+
+  onStoreChange() {
+    this.setState(this.getStateFromStore())
+  }
+
+  onSubmit(e) {
+    const {value, receiverId} = this.state
+    if (value) {
+      e.preventDefault() // html経由の入力によって発生する同期処理を止め、非同期処理に移る。
+      MessagesAction.postMsgs(value, receiverId)
+      this.setState({
+        value: '',
+      })
+    } else {
+      this.setState({
+        value: this.state.value + e.submit, // 意味：入力された値 + 押されたキー ＝ 二重入力
+      })
+    }
+  }
+
+  updateValue(e) {
+    this.setState({
+      value: e.target.value,
+    })
+  }
+
+  // uploadImageChat(e) {
+  //   const inputDOM = e.target
+  //   if (!inputDOM.files.length) return
+  //   const file = inputDOM.files[0]
+  //   MessagesAction.saveImageChat(file, this.state.toUserId)
+  // }
 
   render() {
     return (

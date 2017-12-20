@@ -1,7 +1,9 @@
 import React from 'react'
 import classNames from 'classNames'
 import Msgs from '../../stores/Msgs'
+import CurrentUserStore from '../../stores/current_userStore'
 import ReplyBox from '../../components/messages/replyBox'
+import _ from 'lodash'
 // import Utils from '../../utils'
 
 class MessagesBox extends React.Component {
@@ -16,23 +18,27 @@ class MessagesBox extends React.Component {
   getStateFromStore() {
     return {
       messages: Msgs.getMsgs(),
+      currentUser: CurrentUserStore.getCurrentUser(),
     }
   }
   componentWillMount() {
     Msgs.onChange(this.onChangeHandler)
+    CurrentUserStore.onChange(this.onChangeHandler)
   }
   componentWillUnmount() {
     Msgs.offChange(this.onChangeHandler)
+    CurrentUserStore.offChange(this.onChangeHandler)
   }
   onStoreChange() {
     this.setState(this.getStateFromStore())
   }
 
   render() {
-    const messages = this.state.messages.map(message => {
+    const {messages, currentUser} = this.state
+    const userMessages = _.map(messages, (message) => {
       const messageClasses = classNames({
         'message-box__item': true,
-        // 'message-box__item--from-current': message.user_id === current_user.id,
+        'message-box__item--from-current': message.user_id === currentUser.id,
         'clear': true,
       })
       return (
@@ -47,7 +53,7 @@ class MessagesBox extends React.Component {
     return (
       <div className='message-box'>
         <ul className='message-box__list'>
-          {messages}
+          {userMessages}
         </ul>
         <ReplyBox />,
       </div>

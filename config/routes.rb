@@ -10,6 +10,7 @@ devise_for :users, controllers: {
   namespace :api, { format: 'json' } do
     resources :current_user
     resources :messages
+    get '/users/search', to: 'users#search'
     resources :users
     #   collection do
     #     get :friends

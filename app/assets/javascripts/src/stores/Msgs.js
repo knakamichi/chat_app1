@@ -1,10 +1,13 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
 // import UserStore from './userStore'
-// import MessagesAction from '../actions/messages'
+import friendStore from './friendStore'
+// import CurrentUserStore from '../../stores/current_userStore'
+import MessagesAction from '../actions/messages'
 import {ActionTypes} from '../constants/app'
 
-// let userId = parseInt(Object.keys(UserStore.getUsers())[0], 10)
+let openChatId = parseInt(Object.keys(friendStore.getFriends())[0], 10)
+// parseInt() = parses (analyse specifically) a string and returns an integer.
 
 class MsgsStore extends BaseStore {
   addChangeListener(callback) {
@@ -14,26 +17,26 @@ class MsgsStore extends BaseStore {
     this.off('change', callback)
   }
 
-  // getUserId() {
-  //   const users = UserStore.getUsers()
-  //   if (Number.isNaN(userId) && users.length !== 0) {
-  //     userId = users[0].id
-  //     MessagesAction.getMsgs()
-  //   }
-  //   return userId
-  // }
-
-  getMsgs() {
-    if (!this.get('MsgsJson')) this.setMsgs([])
-    return this.get('MsgsJson')
+  getOpenChatUserId() {
+    const friends = friendStore.getFriends()
+    if (Number.isNaN(openChatId) && friends.length !== 0) {
+      openChatId = friends[0].id
+      MessagesAction.getMsgs(openChatId)
+    } // もし9行目 openChatIdに値が入ってない場合かつ友達が存在する場合、ociに銭湯に位置する友達（arrayの中で）を設定し云々
+    return openChatId // ９行目の値を返す
   }
+
+  // getMsgs() {
+  //   if (!this.get('MsgsJson')) this.setMsgs([])
+  //   return this.get('MsgsJson')
+  // }
 
   setMsgs(array) {
     this.set('MsgsJson', array)
   }
 
-  pushMsgs(array) {
-    this.getMsgs().push(array)
+  pushMsgs(obj) {
+    this.getMsgs().push(obj)
   }
 }
 
@@ -50,9 +53,30 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
 
     case ActionTypes.POST_MSGS:
       // すでにあるデータに書き加えるメソッド
-      Msgs.pushMsgs(action.json)
+      // const messages = CurrentUserStore.getCurrentUser().messages
+      {
+        const receiver_id = friendStore.getfriends().id
+        Msgs.pushMsgs({
+          id: Math.floor(Math.random() * 1000000),
+          content: payload.action.content,
+          receiver_id,
+        })
+      }
       Msgs.emitChange()
       break
+
+    // case ActionTypes.SAVE_IMAGE_CHAT:
+    //   {
+    //     const messages = CurrentUserStore.getCurrentUser().messages
+    //     const currentUserId = CurrentUserStore.getCurrentUser().id
+    //     messages.push({
+    //       image: payload.action.image,
+    //       to_user_id: payload.action.to_user_id,
+    //       user_id: currentUserId,
+    //     })
+    //   }
+    //   Msgs.emitChange()
+    //   break
   }
 
   return true

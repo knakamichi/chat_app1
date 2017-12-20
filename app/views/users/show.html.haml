@@ -6,9 +6,9 @@
       -# %img.img-rounded.img-responsive{:alt => "", :src => "http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"}/
       .col-sm-4.col-md-4
         %blockquote
-          %p=@user.name
+          %p=current_user.name
         -if current_user
           %small
-          %p=@user.email
+          %p=current_user.email
           .user_profile_edit_btn
             %a.btn.btn-info{:href => edit_user_registration_path(current_user)} プロフィール編集

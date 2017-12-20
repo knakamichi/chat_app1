@@ -2,12 +2,12 @@ import React from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 // import Utils from '../../utils'
-// import Msgs from '../../stores/Msgs'
-// import MessagesAction from '../../actions/messages'
-// import UserStore from '../../stores/userStore'
+import Msgs from '../../stores/Msgs'
+import MessagesAction from '../../actions/messages'
 import friendStore from '../../stores/friendStore'
 import UserAction from '../../actions/users'
 import CurrentUserStore from '../../stores/current_userStore'
+import CurrentUserAction from '../../actions/current_user'
 
 class UserList extends React.Component {
   constructor(props) {
@@ -29,6 +29,7 @@ class UserList extends React.Component {
         currentUser,
         currentUserId,
         friends: friendStore.getFriends(),
+        openChatId: Msgs.getOpenChatUserId(),
       }
     } else {
       return {}
@@ -39,20 +40,29 @@ class UserList extends React.Component {
   //   UserStore.onChange(this.onChangeHandler)
     friendStore.onChange(this.onChangeHandler)
     CurrentUserStore.onChange(this.onChangeHandler)
+    Msgs.onChange(this.onChangeHandler)
   }
   componentWillUnmount() {
     // UserStore.offChange(this.onChangeHandler)
     friendStore.offChange(this.onChangeHandler)
     CurrentUserStore.offChange(this.onChangeHandler)
+    Msgs.offChange(this.onChangeHandler)
   }
 
   onStoreChange() {
     this.setState(this.getStateFromStore())
   }
 
-  // changeFriends(friendId) {
-  //
-  // }
+  changeOpenChat(friendsId) {
+    MessagesAction.getMsgs(friendsId)
+    // const userChatAccess = this.getLastAccess(userId)
+    // if (userChatAccess) {
+    //   MessagesAction.updateLastAccess(userId, new Date())
+    // } else {
+    //   MessagesAction.createLastAccess(userId, new Date())
+    // }
+    CurrentUserAction.getCurrentUser()
+  }
 
   // getLastAccess(toUserId) {
   //   const {currentUser} = this.state
@@ -70,17 +80,28 @@ class UserList extends React.Component {
   render() {
     var friendUsers = ''
     if (this.state.friends) {
-      const {friends} = this.state
+      const {friends, openChatId} = this.state
       let allFriends = friends
       friendUsers = _.map(allFriends, (friend) => {
+        // const messageLength = friend.messages.length
+        // const lastMessage = friend.messages[messageLength - 1]
+        // let newMessageIcon
+        // if (lastMessage) {
+        //   if (!userChatAccess || lastMessage.created_at > userChatAccess.last_access) {
+        //     newMessageIcon = (
+        //       <i className='fa fa-circle new-message-icon' />
+        //     )
+        //   }
+
         const itemClasses = classNames({
           'user-list__item': true,
           'clear': true,
-          'user-list__item--active': friend.id,
+          'user-list__item--active': openChatId === friend.id,
         })
         return (
           <li
             key={friend.id}
+            onClick={this.changeOpenChat.bind(this, friend.id)}
             className={itemClasses}
           >
             <div >

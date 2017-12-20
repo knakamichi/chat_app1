@@ -17,6 +17,12 @@ class User < ActiveRecord::Base
   has_many :pending_friends, through: :friend_requests, source: :friend
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
+  has_many :sent_messages, :class_name => "Message", :foreign_key => "sender_id"
+  has_many :received_messages, :class_name => "Message", :foreign_key => "receiver_id"
+  # has_many :messages_sent, :through => :sent_messages, source: :receiver
+  # has_many :messages_received, :through => :received_messages, source: :sender
+  # dependent: :destroy = if a user is destroyed, its friendships and messages should also be destroyed
+
 
   def self.search(search)
     where("name LIKE ?", "%#{search}%")
@@ -46,5 +52,9 @@ class User < ActiveRecord::Base
     friends = Friendship.where(friend_id: friend, user_id: current_user)
     friends.destroy(friends)
   end
+
+  # def msgs
+  #     messages_sent + messages_received
+  # end
 
 end
