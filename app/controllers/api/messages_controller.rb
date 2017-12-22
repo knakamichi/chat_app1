@@ -17,14 +17,19 @@ module Api
       render json: message
     end
 
-    def new
-      @message = current_user.sent_messages.build
-    end
+    # def new
+    #   @message = current_user.sent_messages.build
+    # end
 
     def create
-      if content
+      if params[:content]
         # message = Message.new(sender_id: current_user.id, reciever_id: friend_id, content: content)
-        @message = current_user.sent_messages.build(params[:message])
+        @message = current_user.sent_messages.build(content: params[:content], receiver_id: params[:receiver_id])
+        @message.save
+        render json: @message
+      elsif params[:image]
+        @message = current_user.sent_messages.new(receiver_id: params[:receiver_id])
+        @message.image = params[:image]
         @message.save
         render json: @message
       end
@@ -33,7 +38,8 @@ module Api
     private
 
       # def message_params
-      #   params.require(:contents).permit(:contents)
+      #   # params[:message] があればその値を、なければ {} として評価される。
+      #   params.require(:message, {}).permit(:contents, :sender_id, :receiver_id, :image)
       # end
   end
 

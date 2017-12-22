@@ -26,10 +26,10 @@ class MsgsStore extends BaseStore {
     return openChatId // ９行目の値を返す
   }
 
-  // getMsgs() {
-  //   if (!this.get('MsgsJson')) this.setMsgs([])
-  //   return this.get('MsgsJson')
-  // }
+  getMsgs() {
+    if (!this.get('MsgsJson')) this.setMsgs([])
+    return this.get('MsgsJson')
+  }
 
   setMsgs(array) {
     this.set('MsgsJson', array)
@@ -53,30 +53,14 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
 
     case ActionTypes.POST_MSGS:
       // すでにあるデータに書き加えるメソッド
-      // const messages = CurrentUserStore.getCurrentUser().messages
-      {
-        const receiver_id = friendStore.getfriends().id
-        Msgs.pushMsgs({
-          id: Math.floor(Math.random() * 1000000),
-          content: payload.action.content,
-          receiver_id,
-        })
-      }
+      Msgs.pushMsgs(action.json)
       Msgs.emitChange()
       break
 
-    // case ActionTypes.SAVE_IMAGE_CHAT:
-    //   {
-    //     const messages = CurrentUserStore.getCurrentUser().messages
-    //     const currentUserId = CurrentUserStore.getCurrentUser().id
-    //     messages.push({
-    //       image: payload.action.image,
-    //       to_user_id: payload.action.to_user_id,
-    //       user_id: currentUserId,
-    //     })
-    //   }
-    //   Msgs.emitChange()
-    //   break
+    case ActionTypes.SAVE_IMAGE_CHAT:
+      Msgs.pushMsgs(action.json)
+      Msgs.emitChange()
+      break
   }
 
   return true

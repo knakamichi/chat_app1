@@ -52,12 +52,12 @@ class ReplyBox extends React.Component {
     })
   }
 
-  // uploadImageChat(e) {
-  //   const inputDOM = e.target
-  //   if (!inputDOM.files.length) return
-  //   const file = inputDOM.files[0]
-  //   MessagesAction.saveImageChat(file, this.state.toUserId)
-  // }
+  uploadImageChat(e) {
+    const inputDOM = e.target
+    if (!inputDOM.files.length) return
+    const file = inputDOM.files[0]
+    MessagesAction.saveImageChat(file, this.state.receiverId)
+  }
 
   render() {
     return (
@@ -69,6 +69,14 @@ class ReplyBox extends React.Component {
             className='reply-box__input'
             placeholder='Type message to reply..'
           />
+          <div className='reply-box__image'>
+            <input
+              className='image-select-btn'
+              type='file'
+              ref='image'
+              onChange={this.uploadImageChat.bind(this)}
+            />
+          </div>
           <button type='submit' value='Submit'>Send</button>
         </form>
       </div>

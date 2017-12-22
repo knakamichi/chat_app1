@@ -34,17 +34,19 @@ class MessagesBox extends React.Component {
   }
 
   render() {
+    // debugger
     const {messages, currentUser} = this.state
     const userMessages = _.map(messages, (message) => {
       const messageClasses = classNames({
         'message-box__item': true,
-        'message-box__item--from-current': message.user_id === currentUser.id,
+        'message-box__item--from-current': message.sender_id === currentUser.id,
         'clear': true,
       })
       return (
         <li key={message.id} className={messageClasses}>
           <div className='message-box__item__contents'>
             {message.content}
+            {message.image ? <img className='image-message' src={message.image.thumb.url} /> : message.content}
           </div>
         </li>
       )

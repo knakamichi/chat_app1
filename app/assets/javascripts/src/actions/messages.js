@@ -48,6 +48,28 @@ export default {
     })
   },
 
+  saveImageChat(file, receiver_id) {
+    return new Promise((resolve, reject) => {
+      request
+        .post(`${APIEndpoints.MESSAGES}`)
+        .set('X-CSRF-Token', CSRFToken())
+        .attach('image', file, file.name)
+        .field('receiver_id', receiver_id)
+        .end((error, res) => {
+          if (!error && res.status === 200) {
+            let json = JSON.parse(res.text)
+            Dispatcher.handleServerAction({
+              type: ActionTypes.SAVE_IMAGE_CHAT,
+              json,
+            })
+            resolve(json)
+            console.log(json);
+          } else {
+            reject(res)
+          }
+        })
+    })
+  },
   // createLastAccess(to_user_id, last_access) {
   //   return new Promise((resolve, reject) => {
   //     request
