@@ -6,6 +6,7 @@ export default {
 // getの場合
   getMsgs(friendsId) {
     return new Promise((resolve, reject) => {
+      // debugger
       request
         .get(`${APIEndpoints.MESSAGES}`)
         .query({id: friendsId}) // 取得したいjsonがあるURLを指定する
@@ -14,7 +15,7 @@ export default {
             const json = JSON.parse(res.text)
             Dispatcher.handleServerAction({ // calls the dispatcher to send data to store
               type: ActionTypes.GET_MSGS,
-              receiver_id: friendsId,
+              openChatId: friendsId,
               json, // json: jsonと同じ。keyとvalueが一致する場合、このように省略出来ます。
             })
             resolve(json)
@@ -63,13 +64,35 @@ export default {
               json,
             })
             resolve(json)
-            console.log(json);
           } else {
             reject(res)
           }
         })
     })
   },
+
+  changeOpenChat(friendsId) {
+    return new Promise((resolve, reject) => {
+      // debugger
+      request
+        .get(`${APIEndpoints.MESSAGES}`)
+        .query({id: friendsId}) // 取得したいjsonがあるURLを指定する
+        .end((error, res) => {
+          if (!error && res.status === 200) { // 200はアクセスが成功した際のステータスコードです。
+            const json = JSON.parse(res.text)
+            Dispatcher.handleServerAction({ // calls the dispatcher to send data to store
+              type: ActionTypes.CHANGE_OPEN_CHAT,
+              openChatId: friendsId,
+              json,
+            })
+            resolve(json)
+          } else {
+            reject(res)
+          }
+        })
+    })
+  },
+
   // createLastAccess(to_user_id, last_access) {
   //   return new Promise((resolve, reject) => {
   //     request

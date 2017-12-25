@@ -6,7 +6,7 @@ import friendStore from './friendStore'
 import MessagesAction from '../actions/messages'
 import {ActionTypes} from '../constants/app'
 
-let openChatId = parseInt(Object.keys(friendStore.getFriends())[0], 10)
+var openChatId = parseInt(Object.keys(friendStore.getFriends())[0], 10)
 // parseInt() = parses (analyse specifically) a string and returns an integer.
 
 class MsgsStore extends BaseStore {
@@ -59,6 +59,15 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
 
     case ActionTypes.SAVE_IMAGE_CHAT:
       Msgs.pushMsgs(action.json)
+      Msgs.emitChange()
+      break
+
+    case ActionTypes.CHANGE_OPEN_CHAT:
+      // debugger
+      Msgs.setMsgs(
+        openChatId = payload.action.openChatId,
+        action.json
+      )
       Msgs.emitChange()
       break
   }

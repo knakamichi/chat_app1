@@ -54,6 +54,8 @@ class UserList extends React.Component {
   }
 
   changeOpenChat(friendsId) {
+    // debugger
+    MessagesAction.changeOpenChat(friendsId)
     MessagesAction.getMsgs(friendsId)
     // const userChatAccess = this.getLastAccess(userId)
     // if (userChatAccess) {
