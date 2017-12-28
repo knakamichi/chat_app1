@@ -36,6 +36,15 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <% if current_user.image.url.present? %>
+    <%= image_tag(current_user.image.url) %>
+    <%= f.label :remove_image do %>
+      <%= f.check_box :remove_image %>
+    <% end %>
+  <% end %>
+  <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
+
   <div class="actions">
     <%= f.submit "Submit" %>
   </div>
