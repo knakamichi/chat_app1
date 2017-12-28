@@ -3,17 +3,24 @@ module Api
   before_action :authenticate_user!
 
     def index
-      to_id = User.find(params[:id])
-      current_user_id = current_user.id
-      message = Message.where(
-        "(sender_id = ? and receiver_id = ?) or (sender_id = ? and receiver_id = ?)",
-        current_user_id, to_id, to_id, current_user_id
-      )
+      if params[:id]
+        to_id = User.find(params[:id])
+        current_user_id = current_user.id
+        message = Message.where(
+          "(sender_id = ? and receiver_id = ?) or (sender_id = ? and receiver_id = ?)",
+          current_user_id, to_id, to_id, current_user_id
+        )
       # @messages = Message.all.where(
       #   'sender_id IN (?) AND receiver_id IN (?)',
       #   [@message.sender_id, @message.receiver_id],
       #   [@message.sender_id, @message.receiver_id]
       # )
+      # else
+        # message = Message.where(current_user_id)
+          # "sender_id = ? or receiver_id = ?)",
+          # current_user_id, current_user_id
+        # )
+      end
       render json: message
     end
 
@@ -28,7 +35,8 @@ module Api
         @message.save
         render json: @message
       elsif params[:image]
-        @message = current_user.sent_messages.new(receiver_id: params[:receiver_id])
+        binding.pry
+        @message = current_user.sent_messages.build(receiver_id: params[:receiver_id])
         @message.image = params[:image]
         @message.save
         render json: @message

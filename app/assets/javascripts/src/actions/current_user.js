@@ -12,9 +12,10 @@ export default {
             const json = JSON.parse(res.text)
             Dispatcher.handleServerAction({
               type: ActionTypes.GET_CURRENT_USER,
-              json: json,
+              json,
             })
             resolve(json)
+            // console.log(json)
           } else {
             reject(res)
           }

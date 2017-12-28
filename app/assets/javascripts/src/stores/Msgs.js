@@ -51,6 +51,11 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
       Msgs.emitChange()
       break
 
+    case ActionTypes.GET_ALL_MSGS:
+      Msgs.setMsgs(action.json) // ストアのデータを変えてるから set, Msgsにjsonをset. ここのjson はdb 内の全部のデータ
+      Msgs.emitChange()
+      break
+
     case ActionTypes.POST_MSGS:
       // すでにあるデータに書き加えるメソッド
       Msgs.pushMsgs(action.json)
@@ -66,7 +71,6 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
       // debugger
       Msgs.setMsgs(
         openChatId = payload.action.openChatId,
-        action.json
       )
       Msgs.emitChange()
       break

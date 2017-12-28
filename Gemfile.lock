@@ -73,6 +73,8 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crass (1.0.2)
+    date_timezone (0.2.0)
+      rails (~> 4.2)
     debug_inspector (0.0.3)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -83,6 +85,9 @@ GEM
     devise-i18n (1.4.0)
       devise (>= 3.1)
     devise-i18n-views (0.3.7)
+    devise_lastseenable (0.0.6)
+      devise
+      rails (>= 3.0.4)
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -236,9 +241,11 @@ DEPENDENCIES
   byebug
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.1.0)
+  date_timezone (~> 0.2.0)
   devise (~> 4.2)
   devise-i18n
   devise-i18n-views
+  devise_lastseenable (~> 0.0.6)
   erb2haml
   haml-rails
   jbuilder (~> 2.0)

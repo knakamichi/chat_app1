@@ -17,8 +17,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 4.2'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'devise_lastseenable', '~> 0.0.6'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
+gem 'date_timezone', '~> 0.2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

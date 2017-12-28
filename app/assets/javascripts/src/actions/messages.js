@@ -26,6 +26,28 @@ export default {
     })
   },
 
+  // getAllMsgs() {
+  //   return new Promise((resolve, reject) => {
+  //     // debugger
+  //     request
+  //       .get(`${APIEndpoints.MESSAGES}`)
+  //       // .query({id: friendsId}) // 取得したいjsonがあるURLを指定する
+  //       .end((error, res) => {
+  //         if (!error && res.status === 200) { // 200はアクセスが成功した際のステータスコードです。
+  //           const json = JSON.parse(res.text)
+  //           Dispatcher.handleServerAction({ // calls the dispatcher to send data to store
+  //             type: ActionTypes.GET_ALL_MSGS,
+  //             // openChatId: friendsId,
+  //             json, // json: jsonと同じ。keyとvalueが一致する場合、このように省略出来ます。
+  //           })
+  //           resolve(json)
+  //         } else {
+  //           reject(res)
+  //         }
+  //       })
+  //   })
+  // },
+
   // postの場合
   postMsgs(content, receiver_id) {
     return new Promise((resolve, reject) => {
@@ -71,25 +93,32 @@ export default {
     })
   },
 
+  // changeOpenChat(friendsId) {
+  //   return new Promise((resolve, reject) => {
+  //     // debugger
+  //     request
+  //       .get(`${APIEndpoints.MESSAGES}`)
+  //       .query({id: friendsId}) // 取得したいjsonがあるURLを指定する
+  //       .end((error, res) => {
+  //         if (!error && res.status === 200) { // 200はアクセスが成功した際のステータスコードです。
+  //           const json = JSON.parse(res.text)
+  //           Dispatcher.handleServerAction({ // calls the dispatcher to send data to store
+  //             type: ActionTypes.CHANGE_OPEN_CHAT,
+  //             openChatId: friendsId,
+  //             // json,
+  //           })
+  //           resolve(json)
+  //         } else {
+  //           reject(res)
+  //         }
+  //       })
+  //   })
+  // },
+
   changeOpenChat(friendsId) {
-    return new Promise((resolve, reject) => {
-      // debugger
-      request
-        .get(`${APIEndpoints.MESSAGES}`)
-        .query({id: friendsId}) // 取得したいjsonがあるURLを指定する
-        .end((error, res) => {
-          if (!error && res.status === 200) { // 200はアクセスが成功した際のステータスコードです。
-            const json = JSON.parse(res.text)
-            Dispatcher.handleServerAction({ // calls the dispatcher to send data to store
-              type: ActionTypes.CHANGE_OPEN_CHAT,
-              openChatId: friendsId,
-              json,
-            })
-            resolve(json)
-          } else {
-            reject(res)
-          }
-        })
+    Dispatcher.handleViewAction({
+      type: ActionTypes.CHANGE_OPEN_CHAT,
+      openChatId: friendsId,
     })
   },
 
@@ -110,21 +139,23 @@ export default {
   //   })
   // },
   //
-  // updateLastAccess(to_user_id, last_access) {
-  //   return new Promise((resolve, reject) => {
-  //     request
-  //       .put(`${APIEndpoints.CURRENT_USER}`)
-  //       .set('X-CSRF-Token', CSRFToken())
-  //       .send({to_user_id, last_access})
-  //       .end((error, res) => {
-  //         if (!error && res.status === 200) {
-  //           const json = JSON.parse(res.text)
-  //           resolve(json)
-  //         } else {
-  //           reject(res)
-  //         }
-  //       })
-  //   })
-  // },
+  updateLastAccess(currentUserId, last_access) {
+    return new Promise((resolve, reject) => {
+      // debugger
+      request
+        .put(`${APIEndpoints.USERS}/${currentUserId}`)
+        .set('X-CSRF-Token', CSRFToken())
+        .send({currentUserId, last_seen: last_access})
+        .end((error, res) => {
+          if (!error && res.status === 200) {
+            const json = JSON.parse(res.text)
+            resolve(json)
+            console.log(json)
+          } else {
+            reject(res)
+          }
+        })
+    })
+  },
 
 }

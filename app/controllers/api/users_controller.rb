@@ -1,6 +1,7 @@
 module Api
   class UsersController < ApplicationController
     before_action :authenticate_user!
+    before_action :configure_permitted_parameters, if: :devise_controller?
 
     def index
       @user = User.all
@@ -16,13 +17,25 @@ module Api
       @user = User.find(params[:id])
       render json: @user
     end
-  #
-  #   def create
-  #     lastAccess = User.new(id: params[:id], lastAccess: lastAccess)
-  #     lastAccess.save
-  #   end
-  #
-  #   def update
-  #     lastAccess = User.
+
+    # def create
+    #   lastSeen = DateTime.parse(params[:last_seen])
+    #   # lastSeen.save
+    #   render json: lastSeen
+    # end
+
+    def update
+      # binding.pry
+      lastSeen = DateTime.parse(params[:last_seen])
+      # lastSeen.save
+      render json: lastSeen
+    end
+
+    protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:last_seen) }
+    end
+
   end
 end

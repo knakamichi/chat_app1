@@ -1,5 +1,6 @@
   class FriendRequestsController < ApplicationController
     before_action :set_friend_request, except: [:index, :create]
+    before_action :authenticate_user!
 
     # view incoming and outgoing friend requests
     def index

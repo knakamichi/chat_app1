@@ -7,7 +7,7 @@ import MessagesAction from '../../actions/messages'
 import friendStore from '../../stores/friendStore'
 import UserAction from '../../actions/users'
 import CurrentUserStore from '../../stores/current_userStore'
-import CurrentUserAction from '../../actions/current_user'
+// import CurrentUserAction from '../../actions/current_user'
 
 class UserList extends React.Component {
   constructor(props) {
@@ -30,6 +30,7 @@ class UserList extends React.Component {
         currentUserId,
         friends: friendStore.getFriends(),
         openChatId: Msgs.getOpenChatUserId(),
+        messages: Msgs.getMsgs(),
       }
     } else {
       return {}
@@ -55,22 +56,27 @@ class UserList extends React.Component {
 
   changeOpenChat(friendsId) {
     // debugger
+    const {currentUser} = this.state
     MessagesAction.changeOpenChat(friendsId)
     MessagesAction.getMsgs(friendsId)
-    // const userChatAccess = this.getLastAccess(userId)
-    // if (userChatAccess) {
-    //   MessagesAction.updateLastAccess(userId, new Date())
-    // } else {
-    //   MessagesAction.createLastAccess(userId, new Date())
+    const userChatAccess = this.getLastAccess(currentUser)
+    if (userChatAccess) {
+      MessagesAction.updateLastAccess(currentUser.id, new Date()
+        // .toUTCString()
+      )
+    }
+    // else {
+    //   MessagesAction.createLastAccess(currentUserId, new Date())
     // }
-    CurrentUserAction.getCurrentUser()
+    // CurrentUserAction.getCurrentUser()
   }
 
-  // getLastAccess(toUserId) {
-  //   const {currentUser} = this.state
-  //   const lastAccess = _.find(currentUser.accesses, {to_user_id: toUserId})
-  //   return lastAccess
-  // }
+  getLastAccess(currentUser) {
+    // debugger
+    // const {currentUser} = this.state
+    const lastAccess = currentUser.last_seen // why lastAccess = 2?
+    return lastAccess
+  }
 
   deleteChatConfirm(e) {
     if (!confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
@@ -80,24 +86,39 @@ class UserList extends React.Component {
   }
 
   render() {
+    // debugger
     var friendUsers = ''
     if (this.state.friends) {
-      const {friends, openChatId} = this.state
+      const {friends, openChatId, currentUser, messages} = this.state
       let allFriends = friends
       friendUsers = _.map(allFriends, (friend) => {
-        // const messageLength = friend.messages.length
-        // const lastMessage = friend.messages[messageLength - 1]
-        // let newMessageIcon
-        // if (lastMessage) {
-        //   if (!userChatAccess || lastMessage.created_at > userChatAccess.last_access) {
-        //     newMessageIcon = (
-        //       <i className='fa fa-circle new-message-icon' />
-        //     )
-        //   }
+        const messageLength = messages.length
+        const lastMessage = messages[messageLength - 1]
+        const userChatAccess = this.getLastAccess(currentUser)
+        // console.log(lastMessage)
+        let newMessageIcon
+        if (lastMessage) {
+          // debugger
+          // if (lastMessage.sender_id !== friend.id) {
+          //   newMessageIcon = (
+          //     <i className='fa fa-circle new-message-icon' />
+          //   )
+          // }
+          if (!userChatAccess || lastMessage.created_at > userChatAccess) {
+            newMessageIcon = (
+              <i className='fa fa-circle new-message-icon' />
+            )
+          }
+        }
 
+        // var isNewMessage = false
+        // if (lastMessage.created_at > userChatAccess) {
+        //   // isNewMessage =lastMessage.sender_id !== UserStore.user.id
+        // }
         const itemClasses = classNames({
           'user-list__item': true,
           'clear': true,
+          // 'user-list__item--new': isNewMessage,
           'user-list__item--active': openChatId === friend.id,
         })
         return (
@@ -116,7 +137,7 @@ class UserList extends React.Component {
                 type='submit'
                 value=''
                 className='remove-chat-btn'
-                onClick={this.deleteChatConfirm.bind(this, friend.id)}
+                onClick={this.deleteChatConfirm.bind(this, friend.id, currentUser.id)}
               />
             </div>
             {
@@ -125,13 +146,20 @@ class UserList extends React.Component {
             // </div>
             }
             <div className='user-list__item__details'>
-              <div className='user-list__item__name'>
-                {
-                // {newMessageIcon}
-                }
-                <a className='user-list-name'>{friend.name}</a>
-              </div>
+              <h4 className='user-list__item__name'>
+                {friend.name}
+              </h4>
+              <span className='user-list__item__message'>
+                {newMessageIcon}
+              </span>
             </div>
+            {
+            // <div className='user-list__item__details'>
+            //   <div className='user-list__item__name'>
+
+            //   </div>
+            // </div>
+            }
           </li>
         )
       })
