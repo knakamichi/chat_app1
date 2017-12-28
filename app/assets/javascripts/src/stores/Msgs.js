@@ -1,13 +1,10 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
-// import UserStore from './userStore'
 import friendStore from './friendStore'
-// import CurrentUserStore from '../../stores/current_userStore'
 import MessagesAction from '../actions/messages'
 import {ActionTypes} from '../constants/app'
 
 var openChatId = parseInt(Object.keys(friendStore.getFriends())[0], 10)
-// parseInt() = parses (analyse specifically) a string and returns an integer.
 
 class MsgsStore extends BaseStore {
   addChangeListener(callback) {
@@ -22,8 +19,8 @@ class MsgsStore extends BaseStore {
     if (Number.isNaN(openChatId) && friends.length !== 0) {
       openChatId = friends[0].id
       MessagesAction.getMsgs(openChatId)
-    } // もし9行目 openChatIdに値が入ってない場合かつ友達が存在する場合、ociに銭湯に位置する友達（arrayの中で）を設定し云々
-    return openChatId // ９行目の値を返す
+    }
+    return openChatId
   }
 
   getMsgs() {
@@ -42,22 +39,21 @@ class MsgsStore extends BaseStore {
 
 const Msgs = new MsgsStore()
 
-Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から payloadの形でアクションデータをもらう
-  const action = payload.action // action に payload中のaction, つまり getMsgs か postMsgsを読む。
+Msgs.dispatchToken = Dispatcher.register(payload => {
+  const action = payload.action
 
-  switch (action.type) { // action.type = payload の中の action の種類。(line 40)
+  switch (action.type) {
     case ActionTypes.GET_MSGS:
-      Msgs.setMsgs(action.json) // ストアのデータを変えてるから set, Msgsにjsonをset. ここのjson はdb 内の全部のデータ
+      Msgs.setMsgs(action.json)
       Msgs.emitChange()
       break
 
     case ActionTypes.GET_ALL_MSGS:
-      Msgs.setMsgs(action.json) // ストアのデータを変えてるから set, Msgsにjsonをset. ここのjson はdb 内の全部のデータ
+      Msgs.setMsgs(action.json)
       Msgs.emitChange()
       break
 
     case ActionTypes.POST_MSGS:
-      // すでにあるデータに書き加えるメソッド
       Msgs.pushMsgs(action.json)
       Msgs.emitChange()
       break
@@ -68,7 +64,6 @@ Msgs.dispatchToken = Dispatcher.register(payload => { // Dispatcher から paylo
       break
 
     case ActionTypes.CHANGE_OPEN_CHAT:
-      // debugger
       Msgs.setMsgs(
         openChatId = payload.action.openChatId,
       )

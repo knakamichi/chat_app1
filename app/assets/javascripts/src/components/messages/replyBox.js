@@ -34,14 +34,14 @@ class ReplyBox extends React.Component {
   onSubmit(e) {
     const {value, receiverId} = this.state
     if (value) {
-      e.preventDefault() // html経由の入力によって発生する同期処理を止め、非同期処理に移る。
+      e.preventDefault()
       MessagesAction.postMsgs(value, receiverId)
       this.setState({
         value: '',
       })
     } else {
       this.setState({
-        value: this.state.value + e.submit, // 意味：入力された値 + 押されたキー ＝ 二重入力
+        value: this.state.value + e.submit,
       })
     }
   }
@@ -85,6 +85,3 @@ class ReplyBox extends React.Component {
 }
 
 export default ReplyBox
-
-// value={ this.state.value } // 入力内容をvalue(=textarea)に代入
-// onKeyDown={ this.handleKeyDown.bind(this) } これをかくと、押されたキーがenterキーかどうかを判断しなければならない（e.keycode)

@@ -21,7 +21,6 @@ const APIRoot = `${Root}/api`
 export const APIEndpoints = {
   MESSAGES: APIRoot + '/messages',
   USERS: APIRoot + '/users',
-  RELATIONSHIPS: APIRoot + '/relationships',
   CURRENT_USER: APIRoot + '/current_user',
   FRIENDS: APIRoot + '/friends',
   FRIENDREQUEST: APIRoot + '/friendrequest',

@@ -1,15 +1,22 @@
--provide(:title, 'Friend Requests')
-%p.section_title Friend Requests
-- if @incoming.any?
+.navContainer
   %ul
-    - @incoming.each do |fr|
-      %li= fr.user.name
-      %li= link_to "Accept", friend_request_path(id=fr.id), method: :patch
-      %li= link_to "Decline", friend_request_path(id=fr.id), method: :delete
-- else
-  %p You don't have any friend requests
-%p.section_title Friends You Requested
--if @outgoing.any?
-  %ul
-    - @outgoing.each do |fr|
-      %li= fr.friend.name
+    %li#friendRequests
+      #friendRequests_bar
+        #friendRequests_bar_header
+          %p Friend Requests
+        #midContent
+          #requestsBar
+          - if @incoming.any?
+            - @incoming.each do |fr|
+              #info
+                = fr.user.name
+                .buttons
+                  %li#confirm= link_to "Accept", friend_request_path(id=fr.id), method: :patch
+                  %li#remove= link_to "Decline", friend_request_path(id=fr.id), method: :delete
+          - else
+            %p You don't have any friend requests
+  %p.section_title Friends You Requested
+  -if @outgoing.any?
+    %ul
+      - @outgoing.each do |fr|
+        %li= fr.friend.name

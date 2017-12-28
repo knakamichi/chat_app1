@@ -10,8 +10,6 @@ export default class UserSearchRouter extends BaseRouter {
 
   decorateUserSearch(ctx, next) {
     (new ReactDecorator()).decorate('react-main', Search)
-    // UserAction.loadUsers()
-    // UserAction.loadSearchUsers()
     next()
   }
 }

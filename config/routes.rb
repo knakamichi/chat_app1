@@ -12,11 +12,6 @@ devise_for :users, controllers: {
     resources :messages
     get '/users/search', to: 'users#search'
     resources :users
-    #   collection do
-    #     get :friends
-    #   end
-    # end
-    # resources :relationships,  only: [:create, :destroy]
     resources :friends
   end
 

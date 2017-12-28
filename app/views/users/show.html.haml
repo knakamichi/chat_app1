@@ -3,12 +3,14 @@
 .container
   .row
     .col-sm-2.col-md-2
-      -# %img.img-rounded.img-responsive{:alt => "", :src => "http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"}/
+    -if current_user.image
+      %p
+        %strong
+        =image_tag current_user.image.small.url
       .col-sm-4.col-md-4
         %blockquote
           %p=current_user.name
-        -if current_user
           %small
-          %p=current_user.email
-          .user_profile_edit_btn
-            %a.btn.btn-info{:href => edit_user_registration_path(current_user)} Edit Profile
+            %p=current_user.email
+            .user_profile_edit_btn
+              %a.btn.btn-info{:href => edit_user_registration_path(current_user)} Edit Profile

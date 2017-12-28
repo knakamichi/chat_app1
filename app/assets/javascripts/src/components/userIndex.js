@@ -2,8 +2,6 @@ import React from 'react'
 import _ from 'lodash'
 import UserStore from '../stores/userStore'
 import UsersAction from '../actions/users'
-// import { withRouter } from 'react-router-dom'
-// import Utils from '../../utils'
 
 export default class UserIndex extends React.Component {
   static get propTypes() {
@@ -24,7 +22,6 @@ export default class UserIndex extends React.Component {
 
   getStateFromStore() {
     return {user: UserStore.getUsers()}
-    // return {user: UserStore.getSearchUsers()}
   }
 
   componentDidMount() {
@@ -45,13 +42,12 @@ export default class UserIndex extends React.Component {
   }
 
   render() {
-    const {user} = this.state //  user = this.state.user に同じ
-    // stores the data from the userStore (this.state) as the users property
-    const {searchString} = this.props
-    // stores the typed letters (this.props) in the searchString property
-    let allUsers = user
-    const searchUser = searchString.trim().toLowerCase() // whats the meaning of this code?
+    const {user} = this.state
 
+    const {searchString} = this.props
+
+    let allUsers = user
+    const searchUser = searchString.trim().toLowerCase()
     if (searchUser.length > 0) {
       allUsers = _.filter(allUsers, (user) => {
         return user.name.toLowerCase().match(searchUser)
@@ -80,6 +76,3 @@ export default class UserIndex extends React.Component {
     )
   }
 }
-
-// line 68 <form onClick={this.onClick.bind(this, user.id)}> => onClick で user.id の情報をeventに渡してくれ
-// line 69<input name='user_id' key={user.id} type='hidden' />  ここで渡されてる情報は user.id (key より)

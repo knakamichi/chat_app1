@@ -8,8 +8,7 @@ class FriendRequest < ActiveRecord::Base
   validate :not_pending
 
   def accept
-      # This method will build the actual association and destroy the request
-    user.friends << friend  # append method, able to use because of the has_many :through association
+    user.friends << friend  
     destroy
   end
 

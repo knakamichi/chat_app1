@@ -18,7 +18,6 @@ export default class Search extends React.Component {
     this.setState({
       searchString: e.target.value,
     })
-    // this = userSearchbox component
   }
 
   render() {

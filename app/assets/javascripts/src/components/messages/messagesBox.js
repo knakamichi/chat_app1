@@ -4,7 +4,6 @@ import Msgs from '../../stores/Msgs'
 import CurrentUserStore from '../../stores/current_userStore'
 import ReplyBox from '../../components/messages/replyBox'
 import _ from 'lodash'
-// import Utils from '../../utils'
 
 class MessagesBox extends React.Component {
   constructor(props) {
@@ -34,7 +33,6 @@ class MessagesBox extends React.Component {
   }
 
   render() {
-    // debugger
     const {messages, currentUser} = this.state
     const userMessages = _.map(messages, (message) => {
       const messageClasses = classNames({

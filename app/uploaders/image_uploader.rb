@@ -33,7 +33,15 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process :resize_to_fit => [50, 50]
+    process :resize_to_fit => [100, 100]
+  end
+
+  version :small do
+    process :resize_to_fill => [150, 150]
+  end
+  #
+  version :medium do
+    process :resize_to_fill => [300, 300]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -42,9 +50,9 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-  def default_url(*args)
-    ActionController::Base.helpers.asset_path("fallback/" + [version_name, ""].compact.join('_'))
-  end
+  # def default_url(*args)
+  #   ActionController::Base.helpers.asset_path("fallback/" + [version_name, ""].compact.join('_'))
+  # end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
