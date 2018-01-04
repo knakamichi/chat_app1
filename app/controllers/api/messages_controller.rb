@@ -3,6 +3,7 @@ module Api
   before_action :authenticate_user!
 
     def index
+      # binding.pry
       if params[:id]
         to_id = User.find(params[:id])
         current_user_id = current_user.id
@@ -20,7 +21,6 @@ module Api
         @message.save
         render json: @message
       elsif params[:image]
-        binding.pry
         @message = current_user.sent_messages.new(receiver_id: params[:receiver_id])
         @message.image = params[:image]
         @message.save

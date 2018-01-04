@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, AvatarUploader
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lastseenable
   include DateTimezone
