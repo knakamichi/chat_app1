@@ -2,15 +2,14 @@
 .body
 .container
   .row
-    .col-sm-2.col-md-2
-    -if current_user.image
+    .user-image.col-sm-2.col-md-2
       %p
         %strong
         =image_tag current_user.image.small.url
-      .col-sm-4.col-md-4
-        %blockquote
-          %p=current_user.name
-          %small
-            %p=current_user.email
-            .user_profile_edit_btn
-              %a.btn.btn-info{:href => edit_user_registration_path(current_user)} Edit Profile
+    .user-info.col-sm-4.col-md-4
+      %blockquote
+        %p=current_user.name
+        %small
+          %p=current_user.email
+          .user_profile_edit_btn
+            %a.btn.btn-info{:href => edit_user_registration_path(current_user)} Edit Profile

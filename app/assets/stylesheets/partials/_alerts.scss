@@ -1,0 +1,24 @@
+.alert {
+
+  font: Times;
+  font-size: 13px;
+  white-space: nowrap;
+  float: right;
+  display: inline-block;
+
+  li {
+    float: left;
+  }
+
+  &.alert-error, &.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+  }
+
+  &.alert-success, &.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+  }
+}

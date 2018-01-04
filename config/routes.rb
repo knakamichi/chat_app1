@@ -16,6 +16,7 @@ devise_for :users, controllers: {
   end
 
   get '/users/search', to: 'users#search'
+  get '/users/show', to: 'users#show'
   resources :users
   resources :friend_requests
   root to: 'messages#index'
