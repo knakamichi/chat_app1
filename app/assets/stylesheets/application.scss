@@ -22,14 +22,8 @@
 @import 'components/_userIndex';
 @import 'components/_userShow';
 
+// custom
+// @import 'custom/devise_styles';
+
 /*flash*/
 @import 'partials/_alerts';
-
- .page-title, .field, .links {
-   margin-left: 80px;
- }
-
- .actions {
-   margin-top: 10px;
-   margin-left: 80px;
- }

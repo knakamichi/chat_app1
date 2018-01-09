@@ -41,6 +41,7 @@ class MessagesBox extends React.Component {
         'message-box__item--from-current': message.sender_id === currentUser.id,
         'clear': true,
       })
+
       return (
         <li key={message.id} className={messageClasses}>
           <div className='message-box__item__contents'>

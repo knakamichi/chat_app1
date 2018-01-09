@@ -1,13 +1,7 @@
-<div class="body">
-<h2 class="page-title">Sign up</h2>
+<h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -27,17 +21,9 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="field">
-  <%= f.label :image do %>
-    <%= f.file_field :image %>
-    <%= f.hidden_field :image_cache %>
-  <% end %>
-</div>
-
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
-
 <% end %>
-</div>
+
 <%= render "devise/shared/links" %>

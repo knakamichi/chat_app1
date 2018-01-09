@@ -1,10 +1,9 @@
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
   #ログイン時controller
 
   # GET /resource/sign_in
   def new
-    super                                    # see https://stackoverflow.com/questions/2597643/ruby-super-keyword for definition
+    super
   end
 
   # POST /resource/sign_in
