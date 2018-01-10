@@ -1,32 +1,32 @@
-.userIndex{
-width:410px;
-padding: 5px;
-margin: auto;
-}
-.userIndex #li{
-list-style: none;
-*list-style: decimal;
-font-size: 15px;
-font-family: 'Raleway', sans-serif;
-padding: 0;
-margin-top: 2px;
-margin-bottom: 2px;
-}
+.userIndex {
+  width:410px;
+  padding: 5px;
+  margin: auto;
 
-.userIndex #users{
-position: relative;
-display: block;
-padding: .4em .4em .4em 2em;
-*padding: .4em;
-margin: .5px 0;
-background: #5975D9;
-color: white;
-text-decoration: none;
-box-shadow:inset 0.5em 0 black;
--webkit-transition: box-shadow 1s; /* For Safari 3.1 to 6.0 */
-transition: box-shadow 1s;
-}
-
-.userIndex #users:hover{
-box-shadow:inset 2em 0 black;
+  #li {
+    list-style: none;
+    *list-style: decimal;
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    padding: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
   }
+
+  #users {
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em 2em;
+    *padding: .4em;
+    margin: .5px 0;
+    background: #5975D9;
+    color: white;
+    text-decoration: none;
+    box-shadow:inset 0.5em 0 black;
+    transition: box-shadow 1s;
+
+    &:hover{
+    box-shadow:inset 2em 0 black;
+    }
+  }
+}

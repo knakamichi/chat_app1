@@ -22,11 +22,6 @@ body {
 
   #search {
     border: 1px solid #CCC;
-    -webkit-box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-    -moz-box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-    box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
     border-radius: 3px;
     color: #999;
     float: left;
@@ -37,8 +32,6 @@ body {
 
     &:focus {
       border-color: #aaa;
-      -webkit-box-shadow: 0 1px 1px #bbb inset;
-      -moz-box-shadow: 0 1px 1px #bbb inset;
       box-shadow: 0 1px 1px #bbb inset;
       outline: 0;
     }

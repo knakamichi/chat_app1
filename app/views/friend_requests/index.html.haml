@@ -1,22 +1,16 @@
-.navContainer
-  %ul
-    %li#friendRequests
-      #friendRequests_bar
-        #friendRequests_bar_header
-          %p Friend Requests
-        #midContent
-          #requestsBar
-          - if @incoming.any?
-            - @incoming.each do |fr|
-              #info
-                = fr.user.name
-                .buttons
-                  %li#confirm= link_to "Accept", friend_request_path(id=fr.id), method: :patch
-                  %li#remove= link_to "Decline", friend_request_path(id=fr.id), method: :delete
-          - else
-            %p You don't have any friend requests
-  %p.section_title Friends You Requested
-  -if @outgoing.any?
-    %ul
-      - @outgoing.each do |fr|
-        %li= fr.friend.name
+.body
+  .section-title Friend Requests
+  .form-wrapper.friend-index
+    - if @incoming.any?
+      #midContent
+        - @incoming.each do |fr|
+          %ul.friend-request
+            .friend-image
+              = image_tag fr.user.image.thumb.url
+            .friend-name
+              = fr.user.name
+            .buttons
+              %button#accept= link_to "Accept", friend_request_path(id=fr.id), method: :patch
+              %button#remove= link_to "Decline", friend_request_path(id=fr.id), method: :delete
+    - else
+      %p You don't have any friend requests
