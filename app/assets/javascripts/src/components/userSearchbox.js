@@ -22,10 +22,11 @@ export default class Search extends React.Component {
 
   render() {
     const {searchString} = this.state
+    var classNames = 'form-wrapper searchBox'
     return (
       <div className='form-title'>
         <h2>Search Friends</h2>
-        <div className='form-wrapper'>
+        <div className={classNames}>
           <input type='text'
             value={searchString}
             onChange={this.handleChange.bind(this)}

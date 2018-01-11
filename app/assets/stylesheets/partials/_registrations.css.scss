@@ -1,0 +1,26 @@
+.field {
+  margin: 10px;
+}
+
+p {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.image_selector {
+  position: relative;
+  top: 5px;
+  left: 45%;
+}
+
+.actions {
+  position: relative;
+  top: 5px;
+}
+
+@import "partials/_form-wrapper";
+.profile-edit, .sign-up {
+  margin: 30px auto;
+  width: 425px;
+  padding-bottom: 35px;
+}

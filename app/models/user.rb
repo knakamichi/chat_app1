@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, :class_name => "Message", :foreign_key => "receiver_id"
   validates_integrity_of  :image
   validates_processing_of :image
+  after_commit :remove_image!, on: :destroy
 
   def self.search(search)
     where("name LIKE ?", "%#{search}%")
