@@ -17,7 +17,6 @@ export default {
               json,
             })
             resolve(json)
-            console.log(json)
           } else {
             reject(res)
           }
@@ -78,7 +77,6 @@ export default {
 
   updateLastAccess(currentUserId, last_access) {
     return new Promise((resolve, reject) => {
-      // debugger
       request
         .put(`${APIEndpoints.USERS}/${currentUserId}`)
         .set('X-CSRF-Token', CSRFToken())
@@ -87,7 +85,6 @@ export default {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)
             resolve(json)
-            console.log(json)
           } else {
             reject(res)
           }

@@ -22,7 +22,6 @@ CurrentUser.dispatchToken = Dispatcher.register(payload => {
     case ActionTypes.GET_CURRENT_USER:
       CurrentUser.setCurrentUser(action.json)
       CurrentUser.emitChange()
-      // console.log(action.json)
       break
   }
 

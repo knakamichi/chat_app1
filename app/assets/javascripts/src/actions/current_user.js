@@ -15,7 +15,6 @@ export default {
               json,
             })
             resolve(json)
-            // console.log(json)
           } else {
             reject(res)
           }

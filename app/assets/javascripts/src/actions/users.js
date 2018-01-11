@@ -55,7 +55,6 @@ export default {
               type: ActionTypes.GET_FRIENDS,
               json,
             })
-            // console.log(json)
             resolve(json)
           } else {
             reject(res)
@@ -64,16 +63,15 @@ export default {
     })
   },
 
-  sendFriendRequest(userId) { // userId という情報をこのアクションの中に投入してくれ
+  sendFriendRequest(userId) {
     return new Promise((resolve, reject) => {
       request
         .post('/friend_requests')
         .set('X-CSRF-Token', CSRFToken())
-        .send({friend_id: userId}) // followed_id という名前でuserIdという名の情報を渡せ
+        .send({friend_id: userId})
         .end((error, res) => {
           if (!error && res.status === 200) {
             const json = JSON.parse(res.text)
-            // console.log(json)
             resolve(json)
           } else {
             reject(res)

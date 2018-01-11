@@ -70,8 +70,6 @@ class UserList extends React.Component {
     if (confirm('Are you sure you want to unfriend?')) {
       UserAction.deleteFriends(e)
       MessagesAction.deleteMsgs(e)
-    }else{
-      (e).preventDefault()
     }
   }
 
