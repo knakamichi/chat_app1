@@ -75,23 +75,6 @@ export default {
     })
   },
 
-  updateLastAccess(currentUserId, last_access) {
-    return new Promise((resolve, reject) => {
-      request
-        .put(`${APIEndpoints.USERS}/${currentUserId}`)
-        .set('X-CSRF-Token', CSRFToken())
-        .send({currentUserId, last_seen: last_access})
-        .end((error, res) => {
-          if (!error && res.status === 200) {
-            const json = JSON.parse(res.text)
-            resolve(json)
-          } else {
-            reject(res)
-          }
-        })
-    })
-  },
-
   deleteMsgs(currentUserId, friendId) {
     return new Promise((resolve, reject) => {
       request

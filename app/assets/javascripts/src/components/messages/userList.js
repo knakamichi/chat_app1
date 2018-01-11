@@ -51,19 +51,8 @@ class UserList extends React.Component {
   }
 
   changeOpenChat(friendsId) {
-    const {currentUser} = this.state
     MessagesAction.changeOpenChat(friendsId)
     MessagesAction.getMsgs(friendsId)
-    const userChatAccess = this.getLastAccess(currentUser)
-    if (userChatAccess) {
-      MessagesAction.updateLastAccess(currentUser.id, new Date()
-      )
-    }
-  }
-
-  getLastAccess(currentUser) {
-    const lastAccess = currentUser.last_seen
-    return lastAccess
   }
 
   deleteChatConfirm(e) {

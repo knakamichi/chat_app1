@@ -4,7 +4,4 @@ class UsersController < ApplicationController
     @users = current_user
   end
 
-  def search
-  end
-
 end
