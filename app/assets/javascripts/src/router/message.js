@@ -11,9 +11,9 @@ export default class MessageRouter extends BaseRouter {
   }
 
   decorateApp(ctx, next) {
-    (new ReactDecorator()).decorate('react-main', App) // react-main に App を decorateしろ〜
+    (new ReactDecorator()).decorate('react-main', App)
     MessageAction.getMsgs()
-    MessageAction.changeOpenChat()// ここでルーティングしてsql dbからデータをとるアクションを行う。
+    MessageAction.changeOpenChat()
     UserAction.getFriends()
     CurrentUserAction.getCurrentUser()
     next()

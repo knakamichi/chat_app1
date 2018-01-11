@@ -1,7 +1,6 @@
 import ReactDecorator from '../base/react_decorator'
 import BaseRouter from '../base/router'
 import Search from '../components/userSearchbox'
-// import UserAction from '../actions/users'
 
 export default class UserSearchRouter extends BaseRouter {
   register() {

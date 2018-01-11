@@ -33,7 +33,6 @@ class MessagesBox extends React.Component {
   }
 
   render() {
-    // debugger
     const {messages, currentUser} = this.state
     const userMessages = _.map(messages, (message) => {
       const messageClasses = classNames({

@@ -1,5 +1,4 @@
 class Users::PasswordsController < Devise::PasswordsController
-  # パスワードを忘れた方は...の場合のcontroller
   # GET /resource/password/new
   def new
     super
