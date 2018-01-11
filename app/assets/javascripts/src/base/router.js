@@ -14,7 +14,6 @@ export default class Router {
     page.apply(this, args)
   }
 
-  // just use for rendering single view (not multiple)
   decorateView(View, el, opts) {
     if (!this.views[View.name]) this.views[View.name] = new View(opts)
     this.views[View.name].decorate(el, opts)

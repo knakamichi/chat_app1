@@ -35,7 +35,7 @@ class BaseStore extends EventEmitter {
   }
 
   get(key) {
-    return this.getStorage()[key] // ex: var message = {content: "la"}; から message['content']を取り出し返している。
+    return this.getStorage()[key]
   }
 
   set(key, value) {
