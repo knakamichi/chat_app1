@@ -25,6 +25,7 @@ export default {
   },
 
   postMsgs(content, receiver_id) {
+    debugger
     return new Promise((resolve, reject) => {
       request
         .post(`${APIEndpoints.MESSAGES}`)
